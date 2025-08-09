@@ -75,7 +75,7 @@ export default function Services() {
   ];
 
   return (
-    <div className="bg-black text-white font-sans max-w-full px-10 py-8 overflow-hidden">
+    <div className="text-white font-sans max-w-full px-10 py-8 overflow-hidden">
       <h1 className="text-3xl font-bold mb-8 flex justify-center">
         The latest. Take a look at what's new right now.
       </h1>
