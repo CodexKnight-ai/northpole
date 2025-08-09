@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function Footer() {
@@ -31,15 +32,15 @@ export default function Footer() {
                 aria-label="Footer navigation"
                 className="flex flex-wrap gap-4 sm:gap-6 text-sm sm:text-md md:text-lg font-medium"
               >
-                <a href="#" className="hover:underline">
+                <Link href="/" aria-label="Home" className="hover:underline">
                   Home
-                </a>
-                <a href="#" className="hover:underline">
+                </Link>
+                <Link href="/about-us" aria-label="About Us" className="hover:underline">
                   About Us
-                </a>
-                <a href="#" className="hover:underline">
+                </Link>
+                <Link href="/investors" aria-label="Investors" className="hover:underline">
                   Investors
-                </a>
+                </Link>
               </nav>
             </div>
           </div>
