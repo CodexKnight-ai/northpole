@@ -6,7 +6,7 @@ export default function AboutUs() {
         <div className="secondary-bg min-h-screen flex flex-col text-black sm:pt-[16vh]">
             {/* Title */}
             <main className="flex-1 px-4 md:px-8 lg:px-20 py-10">
-                <h2 className="text-center text-[#C00000] font-extrabold text-3xl md:text-5xl tracking-wider mb-10">
+                <h2 className="text-center text-[#C00000] font-extrabold text-3xl sm:text-6xl md:text-8xl tracking-wider mb-10">
                     NORTHPOLE TIMES
                 </h2>
 
@@ -159,12 +159,17 @@ export default function AboutUs() {
                             </div>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas voluptatum veritatis ab repudiandae reprehenderit, dolor maxime quasi enim natus autem, laudantium provident. Perferendis, quisquam natus repellat odio corporis recusandae dolorem tempora, quis sint error voluptatem enim id quidem vero dolorum ut ea, esse inventore dolore aliquam? Reiciendis aspernatur, aut doloribus magnam ratione eligendi consequatur officia soluta deserunt est repudiandae maiores?</p>
                         </article>
-
-
                     </div>
                 </section>
                 {/* Bottom border */}
                 <div className="border-t border-black mt-8"></div>
+
+                {/*Testimonials*/}
+                <section className="py-10">
+                    <h2 className="text-black text-left italic bold text-xl md:text-3xl mb-10">
+                        Testimonials
+                    </h2>
+                </section>
             </main>
         </div>
     );
