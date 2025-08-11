@@ -9,9 +9,9 @@ return (
   <>
     < Hero /> 
     <About /> 
-    <Milestones />
+    {/* <Milestones />
     <Services />
-    <Testinomials />
+    <Testinomials /> */}
   </>
   );
 }
