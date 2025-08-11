@@ -163,13 +163,6 @@ export default function AboutUs() {
                 </section>
                 {/* Bottom border */}
                 <div className="border-t border-black mt-8"></div>
-
-                {/*Testimonials*/}
-                <section className="py-10">
-                    <h2 className="text-black text-left italic bold text-xl md:text-3xl mb-10">
-                        Testimonials
-                    </h2>
-                </section>
             </main>
         </div>
     );

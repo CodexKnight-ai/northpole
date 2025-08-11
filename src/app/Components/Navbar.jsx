@@ -27,7 +27,7 @@ export default function Navbar() {
     ];
 
     return (
-        <nav className="flex  items-center bg-col1 h-20 mx-14 mt-8 rounded-md p-4">
+        <nav className="flex fixed top-0 z-50  items-center bg-col1 h-20 mx-14 mt-8 rounded-md p-4">
             <div className=' w-[20%] flex items-center justify-center'>
                 <Link href="/" className="text-2xl font-bold">
                     NORTHPOLE
