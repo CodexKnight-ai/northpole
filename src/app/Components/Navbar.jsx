@@ -32,14 +32,14 @@ export default function Navbar() {
 
     const navLinks = [
         { name: 'Home', href: '/' },
-        { name: 'About', href: '/about-us' },
+        { name: 'About Us', href: '/about-us' },
         { name: 'Investors', href: '/services' },
         { name: 'Portfolio', href: '/portfolio' },
     ];
 
     return (
         <>
-            <nav className={`fixed top-0 z-50 flex items-center justify-between w-full bg-col1 h-20 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${scrolled ? 'py-2' : 'py-4'}`}>
+            <nav className={`fixed top-0 sm:top-5 left-0 sm:left-[10%] z-50 flex items-center justify-between w-full sm:w-[80vw] rounded-lg bg-col1 h-20 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${scrolled ? 'py-2' : 'py-4'}`}>
                 {/* Logo */}
                 <div className='flex-shrink-0'>
                     <Link href="/" className="text-xl sm:text-2xl font-bold text-white">
