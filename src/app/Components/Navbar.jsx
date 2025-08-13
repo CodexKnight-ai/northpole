@@ -2,10 +2,12 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FiMenu, FiX } from 'react-icons/fi';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -19,32 +21,94 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [scrolled]);
 
+    // Close mobile menu when route changes
+    useEffect(() => {
+        const handleRouteChange = () => {
+            setIsMenuOpen(false);
+        };
+        window.addEventListener('popstate', handleRouteChange);
+        return () => window.removeEventListener('popstate', handleRouteChange);
+    }, []);
+
     const navLinks = [
         { name: 'Home', href: '/' },
         { name: 'About', href: '/about-us' },
         { name: 'Investors', href: '/services' },
-        { name: 'Investors', href: '/portfolio' },
+        { name: 'Portfolio', href: '/portfolio' },
     ];
 
     return (
-        <nav className=" fixed top-0 z-50 flex  items-center bg-col1 h-20 mx-14 mt-8 rounded-md p-4">
-            <div className=' w-[20%] flex items-center justify-center'>
-                <Link href="/" className="text-2xl font-bold">
-                    NORTHPOLE
-                </Link>
-            </div>
-            <div className='w-[70%]'>
-                <ul className="flex space-x-12 ">
+        <>
+            <nav className={`fixed top-0 z-50 flex items-center justify-between w-full bg-col1 h-20 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${scrolled ? 'py-2' : 'py-4'}`}>
+                {/* Logo */}
+                <div className='flex-shrink-0'>
+                    <Link href="/" className="text-xl sm:text-2xl font-bold text-white">
+                        NORTHPOLE
+                    </Link>
+                </div>
+
+                {/* Desktop Navigation */}
+                <div className='hidden md:flex md:items-center md:justify-between w-full max-w-3xl mx-8'>
+                    <ul className="flex space-x-4 lg:space-x-8">
+                        {navLinks.map((link) => (
+                            <li key={link.name}>
+                                <Link 
+                                    href={link.href} 
+                                    className="font-medium text-[#414141] hover:text-white transition-all duration-300 text-sm sm:text-base"
+                                >
+                                    {link.name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                    <button 
+                        onClick={() => router.push('/contact-us')} 
+                        className="bg-white text-black rounded-md px-4 sm:px-6 py-2 hover:bg-opacity-90 transition-all duration-300 text-sm sm:text-base"
+                    >
+                        Contact Us
+                    </button>
+                </div>
+
+                {/* Mobile menu button */}
+                <div className='md:hidden'>
+                    <button
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        className='text-white focus:outline-none'
+                        aria-label='Toggle menu'
+                    >
+                        {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+                    </button>
+                </div>
+            </nav>
+
+            {/* Mobile Menu */}
+            <div 
+                className={`fixed top-20 left-0 right-0 bg-col1 z-40 transition-all duration-300 ease-in-out transform ${
+                    isMenuOpen ? 'translate-y-0' : '-translate-y-full'
+                } md:hidden`}
+            >
+                <div className='px-4 py-2 space-y-4'>
                     {navLinks.map((link) => (
-                        <li key={link.name}>
-                            <Link href={link.href} className=" font-medium text-[#414141] hover:text-white transition-all duration-300">
-                                {link.name}
-                            </Link>
-                        </li>
+                        <Link
+                            key={link.name}
+                            href={link.href}
+                            className='block px-3 py-2 text-base font-medium text-[#414141] hover:text-white transition-colors duration-200'
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            {link.name}
+                        </Link>
                     ))}
-                </ul>
+                    <button 
+                        onClick={() => {
+                            router.push('/contact-us');
+                            setIsMenuOpen(false);
+                        }}
+                        className='w-full mt-4 bg-white text-black rounded-md px-4 py-2 text-center font-medium hover:bg-opacity-90 transition-colors duration-200'
+                    >
+                        Contact Us
+                    </button>
+                </div>
             </div>
-            <button className="bg-white h-full text-black rounded-md px-8 hover:text-white">Contact Us</button> 
-        </nav>
+        </>
     );
 }

@@ -1,12 +1,14 @@
 import Image from "next/image";
 import React from "react";
-
+import Testimonial from "../Components/Testimonial";
+import OurStory from "../Components/OurStory";
 export default function AboutUs() {
     return (
-        <div className="secondary-bg min-h-screen flex flex-col text-black sm:pt-[16vh]">
+        <>
+        <div className="secondary-bg min-h-screen flex flex-col text-black pt-20 sm:pt-[16vh]">
             {/* Title */}
             <main className="flex-1 px-4 md:px-8 lg:px-20 py-10">
-                <h2 className="text-center text-[#C00000] font-extrabold text-3xl sm:text-6xl md:text-8xl tracking-wider mb-10">
+                <h2 className="text-center text-[#C00000] font-extrabold text-4xl sm:text-6xl md:text-8xl tracking-wider mb-10">
                     NORTHPOLE TIMES
                 </h2>
 
@@ -163,7 +165,10 @@ export default function AboutUs() {
                 </section>
                 {/* Bottom border */}
                 <div className="border-t border-black mt-8"></div>
+                <Testimonial/>
             </main>
         </div>
+                <OurStory/>
+        </>
     );
 }
