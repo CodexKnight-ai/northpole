@@ -32,7 +32,7 @@ export default function NorthpoleServices() {
           {/* Services Header Section */}
           <section className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 max-w-[90vw] mx-auto flex flex-col lg:flex-row lg:justify-between lg:items-startpb-6 sm:pb-8 lg:pb-12 mb-8 sm:mb-12">
             <div className="mb-6 lg:mb-0">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light leading-tight tracking-wide">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-light leading-tight tracking-wide">
                 OUR<br />SERVICES
               </h1>
             </div>
