@@ -1,9 +1,9 @@
 import Hero from "./Components/Hero"; 
 import About from "./Components/About"; 
-import Services from "./components/Services";
-import Testimonials_Home from "./components/Testinomials_Home";
-import Milestones from "./components/Milestones"; 
-import Stats from "./components/Stats"; 
+import Services from "./Components/Services";
+import Testimonials_Home from "./Components/Testinomials_Home";
+import Milestones from "./Components/Milestones"; 
+import Stats from "./Components/Stats";
 
 export default function Home() {
 return (  
