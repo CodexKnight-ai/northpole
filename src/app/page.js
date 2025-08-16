@@ -1,7 +1,7 @@
 import Hero from "./Components/Hero"; 
 import About from "./Components/About"; 
 import Services from "./Components/Services";
-import Testimonials_Home from "./Components/Testinomials_Home";
+import Testinomials_Home from "./Components/Testinomials_Home"
 import Milestones from "./Components/Milestones"; 
 import Stats from "./Components/Stats";
 
@@ -13,7 +13,7 @@ return (
     <Milestones/>
     <Services />
     <Stats/>
-    <Testimonials_Home/>
+    <Testinomials_Home/>
   </>
   );
 }
