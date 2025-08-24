@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
 
 const slides = [
   {
@@ -24,226 +23,144 @@ const slides = [
   }
 ];
 
-const CarouselContainer = styled.div`
+export default function Milestones() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
   
-  height : 55vh;
-  margin: 3rem auto;
-  margin-bottom : 40vh;
-  position: relative;
-  text-align: center;
-`;
-
-const CarouselInner = styled.div`
-    
-  height : 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3rem;
-  overflow: visible;
-`;
-
-const SideCardContainer = styled.div`
-  flex: 0 0 30%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const SideImage = styled.div`
-  width: 100%;
-  height: 60%;
-  background-size: cover;
-  background-position: center;
-  border-radius: 0.5rem;
-  opacity: ${props => props.isActive ? '1' : '0.3'};
-  filter: ${props => props.isActive ? 'brightness(1)' : 'brightness(0.7)'};
-  transition: all 0.3s ease;
-  aspect-ratio: 4/3;
-`;
-
-const SideContent = styled.div`
-  text-align: center;
-  color: #ccc;
-  opacity: ${props => props.isActive ? '1' : '0.7'};
-  transition: opacity 0.3s ease;
-  
-  h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: ${props => props.isActive ? '#fff' : '#aaa'};
-  }
-  
-  p {
-    font-size: 0.8rem;
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    color: #bbb;
-  }
-`;
-
-const MainCard = styled.div`
-  width: 50vw;
-  background-color: transparent;
-  border-radius: 0.5rem;
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const MainImage = styled.img`
-  width: 100%;
-  object-fit: cover;
-  border-radius: 0.5rem;
-`;
-
-const CaptionContainer = styled.div`
-  margin-top: 1rem;
-  color: #ccc;
-`;
-
-const CaptionTitle = styled.h2`
-  font-size: 1.75rem;
-  font-weight: 500;
-  margin-bottom: 0.4rem;
-`;
-
-const CaptionDesc = styled.p`
-  max-width: 70%;
-  margin: 0 auto;
-  font-size: 0.95rem;
-  line-height: 1.4;
-  color: #aaa;
-  
-  @media (max-width: 768px) {
-    max-width: 90%;
-  }
-`;
-
-const CarouselButton = styled.button`
-  position: absolute;
-  bottom:-5;
-  transform: translateY(-50%);
-  background: white;
-  border-radius: 9999px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: black;
-  font-weight: bold;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 0.25);
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-  border: none;
-  z-index: 10;
-  
-  &:hover {
-    background-color: #e5e7eb;
-  }
-  
-  &#prev-btn {
-    left: 10px;
-  }
-  
-  &#next-btn {
-    right: 10px;
-  }
-`;
-
-const Milestones = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const setSlide = (index) => {
-    // Clamp index
-    let newIndex = index;
-    if (newIndex < 0) newIndex = slides.length - 1;
-    else if (newIndex >= slides.length) newIndex = 0;
-    setCurrentIndex(newIndex);
+  const nextSlide = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    setTimeout(() => setIsAnimating(false), 300);
   };
-
-  const goToPrev = () => setSlide(currentIndex - 1);
-  const goToNext = () => setSlide(currentIndex + 1);
-
+  
+  const prevSlide = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    setTimeout(() => setIsAnimating(false), 300);
+  };
+  
+  const goToSlide = (index) => {
+    if (isAnimating || index === currentSlide) return;
+    setIsAnimating(true);
+    setCurrentSlide(index);
+    setTimeout(() => setIsAnimating(false), 300);
+  };
+  
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowLeft') goToPrev();
-      else if (e.key === 'ArrowRight') goToNext();
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 5000);
+    
+    return () => clearInterval(timer);
+  }, [currentSlide]);
+  
+  // Preload next and previous images
+  useEffect(() => {
+    const preloadImages = [];
+    const nextIndex = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
+    const prevIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+    
+    [nextIndex, prevIndex].forEach(index => {
+      const img = new Image();
+      img.src = slides[index].img;
+      preloadImages.push(img);
+    });
+    
+    return () => {
+      // Cleanup function to prevent memory leaks
+      preloadImages.length = 0;
     };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentIndex]);
-
-  const currentSlide = slides[currentIndex];
-  const leftIndex = (currentIndex - 1 + slides.length) % slides.length;
-  const rightIndex = (currentIndex + 1) % slides.length;
+  }, [currentSlide]);
 
   return (
-    <CarouselContainer role="region" aria-label="Image Carousel">
-      <CarouselInner>
-        <SideCardContainer>
-          <SideImage 
-            style={{ backgroundImage: `url('${slides[leftIndex].img}')` }}
-            isActive={false}
-          />
-          <SideContent isActive={false}>
-            <h3>{slides[leftIndex].title}</h3>
-            <p>{slides[leftIndex].desc}</p>
-          </SideContent>
-        </SideCardContainer>
-        <MainCard>
-          <div style={{ 
-            flex: 1,
-            backgroundImage: `url('${currentSlide.img}')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            borderRadius: '0.5rem'
-          }} />
-        </MainCard>
-        <SideCardContainer>
-          <SideImage 
-            style={{ backgroundImage: `url('${slides[rightIndex].img}')` }}
-            isActive={false}
-          />
-          <SideContent isActive={false}>
-            <h3>{slides[rightIndex].title}</h3>
-            <p>{slides[rightIndex].desc}</p>
-          </SideContent>
-        </SideCardContainer>
-      </CarouselInner>
-      
-      <CaptionContainer aria-live="polite" aria-atomic="true">
-        <CaptionTitle>{currentSlide.title}</CaptionTitle>
-        <CaptionDesc>{currentSlide.desc}</CaptionDesc>
-      </CaptionContainer>
-
-      <CarouselButton 
-        id="prev-btn" 
-        aria-label="Previous Slide" 
-        onClick={goToPrev}
-        className='ml-[6vw]'
-      >
-        ←
-      </CarouselButton>
-      <CarouselButton 
-        id="next-btn" 
-        aria-label="Next Slide" 
-        onClick={goToNext}
-        className='mr-[6vw]'
-      >
-        →
-      </CarouselButton>
-    </CarouselContainer>
+    <div className="relative w-full py-12 md:py-20 lg:py-28 overflow-hidden bg-black">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
+          Our Journey
+        </h2>
+        
+        <div className="relative w-full">
+          {/* Navigation Buttons */}
+          <button 
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50"
+            aria-label="Previous slide"
+          >
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          <button 
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50"
+            aria-label="Next slide"
+          >
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+          
+          {/* Slides Container */}
+          <div className="relative w-full overflow-hidden">
+            <div 
+              className="flex transition-transform duration-500 ease-out"
+              style={{
+                transform: `translateX(calc(-${currentSlide * 100}% - ${currentSlide * 2}rem))`,
+              }}
+            >
+              {slides.map((slide, index) => (
+                <div 
+                  key={index}
+                  className="flex-shrink-0 w-full px-2 transition-all duration-300"
+                  style={{
+                    transform: currentSlide === index ? 'scale(1)' : 'scale(0.9)',
+                    opacity: currentSlide === index ? 1 : 0.7,
+                  }}
+                >
+                  <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl shadow-xl overflow-hidden h-full">
+                    <div className="aspect-video w-full overflow-hidden">
+                      <img
+                        src={slide.img}
+                        alt={slide.alt}
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCA4MDAgNDAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjFmMWYxIi8+PHRleHQgeD0iNTAlIiB5PSI1JSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBhbGlnbm1lbnQtYmFzZWxpbmU9Im1pZGRsZSIgZmlsbD0iIzY2NiI+UGxhY2Vob2xkZXIgSW1hZ2U8L3RleHQ+PC9zdmc+';
+                        }}
+                      />
+                    </div>
+                    <div className="p-6 md:p-8">
+                      <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+                        {slide.title}
+                      </h3>
+                      <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                        {slide.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Dots Navigation */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                  currentSlide === index ? 'bg-white w-6' : 'bg-white/30 w-2.5 hover:bg-white/50'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
-};
-
-export default Milestones;
-
+}

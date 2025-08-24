@@ -1,204 +1,444 @@
-"use client";   
+"use client";
 
-import React from "react";
+import React, { useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+  ArcElement,
+} from 'chart.js';
+import { Line, Bar, Doughnut } from 'react-chartjs-2';
 
-
+// Register ChartJS components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+  ArcElement
+);
 
 const Stats = () => {
+  // Data for the line chart (First Card)
+  const lineChartData = {
+    labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+    datasets: [
+      {
+        label: 'Wealth Growth',
+        data: [100, 115, 130, 142, 155, 170, 185],
+        borderColor: '#E9DBC2',
+        backgroundColor: (context) => {
+          const ctx = context.chart.ctx;
+          const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+          gradient.addColorStop(0, 'rgba(233, 219, 194, 0.2)');
+          gradient.addColorStop(1, 'rgba(13, 13, 13, 0)');
+          return gradient;
+        },
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: '#0D0D0D',
+        pointBorderColor: '#E9DBC2',
+        pointRadius: 0,
+        pointHoverRadius: 6,
+        pointHoverBackgroundColor: '#0D0D0D',
+        pointHoverBorderWidth: 2,
+        borderWidth: 2,
+        borderJoinStyle: 'round',
+      },
+    ],
+  };
+
+  const lineChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        backgroundColor: 'rgba(6, 6, 6, 0.95)', // Using col1 (#060606) from theme
+        titleFont: { 
+          size: 13, 
+          weight: 'bold',
+          family: 'Arial, sans-serif',
+          color: '#E9DBC2' // Accent color for text
+        },
+        bodyFont: { 
+          size: 13,
+          family: 'Arial, sans-serif',
+          color: '#EDEDED' // Light text color
+        },
+        padding: 12,
+        displayColors: false,
+        callbacks: {
+          label: (context) => {
+            return `Growth: ${context.parsed.y}%`;
+          },
+          title: (items) => {
+            return `Year: ${items[0]?.label || ''}`;
+          }
+        },
+        cornerRadius: 4,
+        borderColor: 'rgba(233, 219, 194, 0.3)', // Accent color with transparency
+        borderWidth: 1,
+      },
+    },
+    layout: {
+      padding: {
+        top: 20,
+        right: 20,
+        bottom: 10,
+        left: 10
+      }
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
+          drawBorder: false,
+        },
+        ticks: {
+          color: '#E9DBC2', // Accent color for better visibility
+          font: {
+            weight: '500',
+            size: 12,
+            family: 'Arial, sans-serif'
+          },
+          padding: 10
+        },
+      },
+      y: {
+        grid: {
+          color: 'rgba(153, 153, 153, 0.2)', // Secondary text color with transparency
+          drawBorder: false,
+          borderDash: [4, 4],
+          drawTicks: false,
+          lineWidth: 1
+        },
+        ticks: {
+          color: '#999999', // Secondary text color
+          font: {
+            family: 'Arial, sans-serif',
+            size: 11
+          },
+          padding: 8,
+          callback: (value) => `${value}%`,
+        },
+        beginAtZero: true,
+      },
+    },
+    animation: {
+      duration: 2000,
+      easing: 'easeOutQuart',
+    },
+  };
+
+  // Data for the bar chart (Second Card)
+  const barChartData = {
+    labels: ['Others', 'Titan'],
+    datasets: [
+      {
+        label: 'Cost Comparison',
+        data: [200, 100],
+        backgroundColor: [
+          'rgba(153, 153, 153, 0.6)', // Secondary text color for others
+          'rgba(233, 219, 194, 0.9)', // Accent color for Titan
+        ],
+        borderColor: [
+          'rgba(153, 153, 153, 0.8)', // Border for others
+          'rgba(233, 219, 194, 1)',  // Border for Titan
+        ],
+        borderWidth: 1,
+        borderRadius: 2,
+        barPercentage: 0.7, // Increased width of bars
+        categoryPercentage: 0.6, // More space between categories
+      },
+    ],
+  };
+
+  const barChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        backgroundColor: 'rgba(6, 6, 6, 0.95)', // Using col1 (#060606)
+        titleFont: { 
+          size: 13, 
+          weight: 'bold',
+          family: 'Arial, sans-serif',
+          color: '#E9DBC2' // Accent color for text
+        },
+        bodyFont: { 
+          size: 13,
+          family: 'Arial, sans-serif',
+          color: '#EDEDED' // Light text color
+        },
+        padding: 12,
+        displayColors: false,
+        callbacks: {
+          label: (context) => {
+            return `Cost: $${context.raw}`;
+          },
+          title: (items) => {
+            return items[0]?.label || '';
+          }
+        },
+        cornerRadius: 4,
+        borderColor: 'rgba(233, 219, 194, 0.3)', // Accent color with transparency
+        borderWidth: 1,
+      },
+    },
+    layout: {
+      padding: {
+        top: 20,
+        right: 20,
+        bottom: 10,
+        left: 10
+      }
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
+          drawBorder: false,
+        },
+        ticks: {
+          color: '#E9DBC2', // Accent color for better visibility
+          font: {
+            weight: '500',
+            size: 13,
+            family: 'Arial, sans-serif'
+          },
+          padding: 10
+        },
+      },
+      y: {
+        grid: {
+          color: 'rgba(153, 153, 153, 0.2)', // Secondary text color with transparency
+          drawBorder: false,
+          borderDash: [4, 4],
+          drawTicks: false,
+          lineWidth: 1
+        },
+        ticks: {
+          color: '#999999', // Secondary text color
+          font: {
+            family: 'Arial, sans-serif',
+            size: 11
+          },
+          padding: 8,
+          callback: (value) => `$${value}`,
+        },
+        beginAtZero: true,
+      },
+    },
+    animation: {
+      duration: 1500,
+      easing: 'easeOutQuart'
+    },
+  };
+
+  // Data for the donut chart (Third Card)
+  const donutChartData = {
+    labels: ['Time Saved', 'Time Spent'],
+    datasets: [
+      {
+        data: [100, 0],
+        backgroundColor: [
+          'rgba(233, 219, 194, 0.9)', // Main accent color
+          'rgba(23, 23, 23, 0.5)',    // Darker background
+        ],
+        borderColor: [
+          'rgba(233, 219, 194, 1)',   // Border matches fill
+          'rgba(23, 23, 23, 0.7)',    // Slightly lighter border for contrast
+        ],
+        borderWidth: 0,
+        cutout: '75%',
+        borderRadius: 2,
+        spacing: 2,
+        hoverOffset: 8,
+      },
+    ],
+  };
+
+  const donutChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        backgroundColor: 'rgba(6, 6, 6, 0.95)', // Using col1 (#060606)
+        titleFont: { 
+          size: 13, 
+          weight: 'bold',
+          family: 'Arial, sans-serif',
+          color: '#E9DBC2' // Accent color for text
+        },
+        bodyFont: { 
+          size: 13,
+          family: 'Arial, sans-serif',
+          color: '#EDEDED' // Light text color
+        },
+        padding: 12,
+        displayColors: false,
+        callbacks: {
+          label: (context) => {
+            return `${context.label}: ${context.raw}%`;
+          },
+        },
+        cornerRadius: 4,
+        borderColor: 'rgba(233, 219, 194, 0.3)', // Accent color with transparency
+        borderWidth: 1,
+      },
+    },
+    cutout: '70%',
+    radius: '85%',
+    animation: {
+      animateScale: true,
+      animateRotate: true,
+      duration: 1500,
+      easing: 'easeOutQuart',
+    },
+  };
+
+  // Animation variants
+  const cardVariants = {
+    offscreen: {
+      y: 50,
+      opacity: 0,
+    },
+    onscreen: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: 'spring',
+        bounce: 0.4,
+        duration: 1,
+      },
+    },
+  };
+
   return (
-    <div className="bg-gradient-to-b from-black via-[#1a0f00] to-black min-h-screen flex items-center justify-center p-6 font-inter">
-      <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* === Left Card === */}
-        <div className="relative rounded-2xl border border-orange-500 shadow-[0_0_6px_#f97316] bg-gradient-to-b from-[#3a2205] to-[#1a0f00] p-6 flex flex-col justify-between text-white">
+    <div className="bg-gradient-to-b from-black via-[#1a0f00] to-black min-h-screen flex items-center justify-center p-4 sm:p-6 font-inter">
+      <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        {/* === Left Card - Line Chart === */}
+        <motion.div 
+          className="relative rounded-xl sm:rounded-2xl border border-orange-500 shadow-[0_0_6px_#f97316] bg-gradient-to-b from-[#3a2205] to-[#1a0f00] p-4 sm:p-6 flex flex-col justify-between text-white h-full"
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={cardVariants}
+        >
           <button
             aria-label="Expand details"
-            className="absolute top-4 right-4 w-7 h-7 rounded-full bg-[#3a2205] text-orange-500 flex items-center justify-center text-lg font-bold leading-none select-none"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#3a2205] text-orange-500 flex items-center justify-center text-base sm:text-lg font-bold leading-none select-none z-10 hover:bg-orange-600 hover:text-white active:scale-95 transition-all duration-200"
           >
             +
           </button>
-          <p className="text-sm leading-relaxed mb-4">
+          <p className="text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 text-gray-200">
             Titan clients have historically compounded their wealth at an
             average of 10.72% /year. Composite performance represents the net
-            annualized return from 2/20/18 through 12/31/24. Tap the '+' for
-            additional disclosures.
+            annualized return from 2/20/18 through 12/31/24.
+            <span className="block mt-1 text-orange-300">Tap '+' for details</span>
           </p>
-          <div className="relative w-full h-36 mb-6">
-            <svg viewBox="0 0 300 120" className="w-full h-full">
-              <defs>
-                <linearGradient
-                  id="orangeGradient1"
-                  x1="0"
-                  y1="0"
-                  x2="0"
-                  y2="1"
-                >
-                  <stop offset="0%" stopColor="#f97316" stopOpacity="0.6" />
-                  <stop offset="100%" stopColor="#f97316" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-
-              {/* Grid lines */}
-              <g stroke="#4b2e05" strokeWidth="0.5">
-                {[...Array(9)].map((_, i) => (
-                  <line
-                    key={i}
-                    x1={30 + i * 30}
-                    y1="10"
-                    x2={30 + i * 30}
-                    y2="110"
-                  />
-                ))}
-              </g>
-
-              {/* Baseline line */}
-              <polyline
-                points="30,110 60,100 90,90 120,82 150,75 180,70 210,65 240,60 270,55"
-                stroke="#9ca3af"
-                strokeWidth="2"
-                fill="none"
-              />
-
-              {/* Titan fill area */}
-              <path
-                d="M30,110 L60,95 L90,80 L120,70 L150,62 L180,55 L210,50 L240,45 L270,40 L270,110 Z"
-                fill="url(#orangeGradient1)"
-              />
-
-              {/* Titan line */}
-              <polyline
-                points="30,110 60,95 90,80 120,70 150,62 180,55 210,50 240,45 270,40"
-                stroke="#f97316"
-                strokeWidth="2"
-                fill="none"
-              />
-            </svg>
-            <div className="absolute top-8 left-[65%] bg-orange-600 text-white text-xs font-semibold rounded-full px-3 py-1">
-              With Titan +10.72%
+          <div className="relative w-full h-40 sm:h-48 mb-4 sm:mb-6">
+            <Line data={lineChartData} options={lineChartOptions} />
+            <div className="absolute top-1 sm:top-2 right-1 sm:right-2 bg-orange-600/90 text-white text-[10px] sm:text-xs font-semibold rounded-full px-2 sm:px-3 py-0.5 sm:py-1 backdrop-blur-sm">
+              +10.72% YoY
             </div>
           </div>
           <div className="flex items-baseline font-light select-none">
-            <span className="text-[5.5rem] leading-none font-bold">10.72</span>
-            <span className="text-2xl leading-none ml-1 font-semibold">%</span>
+            <span className="text-[4rem] sm:text-[5.5rem] leading-none font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">
+              10.72
+            </span>
+            <span className="text-xl sm:text-2xl leading-none ml-0.5 sm:ml-1 font-semibold text-orange-400">%</span>
           </div>
-        </div>
+          <div className="text-xs sm:text-sm text-gray-300 mt-0.5 sm:mt-1">Average Annual Return</div>
+        </motion.div>
 
-        {/* === Middle Card === */}
-        <div className="relative rounded-2xl border border-orange-500 shadow-[0_0_6px_#f97316] bg-gradient-to-b from-[#3a2205] to-[#1a0f00] p-6 flex flex-col justify-between text-white">
+        {/* === Middle Card - Bar Chart === */}
+        <motion.div 
+          className="relative rounded-2xl border border-orange-500 shadow-[0_0_6px_#f97316] bg-gradient-to-b from-[#3a2205] to-[#1a0f00] p-6 flex flex-col justify-between text-white"
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={cardVariants}
+          transition={{ delay: 0.1 }}
+        >
           <button
             aria-label="Expand details"
-            className="absolute top-4 right-4 w-7 h-7 rounded-full bg-[#3a2205] text-orange-500 flex items-center justify-center text-lg font-bold leading-none select-none"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#3a2205] text-orange-500 flex items-center justify-center text-base sm:text-lg font-bold leading-none select-none z-10 hover:bg-orange-600 hover:text-white active:scale-95 transition-all duration-200"
           >
             +
           </button>
-          <p className="text-sm leading-relaxed mb-4">
+          <p className="text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 text-gray-200">
             Better value than a typical private wealth manager.
           </p>
-          <div className="relative w-full h-36 mb-6">
-            <svg viewBox="0 0 300 120" className="w-full h-full">
-              <defs>
-                <linearGradient
-                  id="orangeGradient2"
-                  x1="0"
-                  y1="0"
-                  x2="0"
-                  y2="1"
-                >
-                  <stop offset="0%" stopColor="#f97316" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#f97316" stopOpacity="0.3" />
-                </linearGradient>
-              </defs>
-
-              {/* Bars */}
-              <rect
-                x="50"
-                y="20"
-                width="50%"
-                height="90"
-                rx="10"
-                fill="#4b2e05"
-              />
-              <rect
-                x="180"
-                y="65"
-                width="50%"
-                height="45"
-                rx="10"
-                fill="url(#orangeGradient2)"
-              />
-
-              {/* Labels */}
-              <text
-                x="75"
-                y="15"
-                fill="#f97316"
-                fontSize="10"
-                fontWeight="600"
-                textAnchor="middle"
-              >
-                Others
-              </text>
-              <text
-                x="205"
-                y="60"
-                fill="white"
-                fontSize="10"
-                fontWeight="500"
-                textAnchor="middle"
-              >
-                Titan
-              </text>
-            </svg>
+          <div className="relative w-full h-40 sm:h-48 mb-4 sm:mb-6">
+            <Bar data={barChartData} options={barChartOptions} />
           </div>
           <div className="flex items-baseline font-light select-none">
-            <span className="text-[5.5rem] leading-none font-bold">50</span>
-            <span className="text-2xl leading-none ml-1 font-semibold">%</span>
+            <span className="text-[4rem] sm:text-[5.5rem] leading-none font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">
+              50
+            </span>
+            <span className="text-xl sm:text-2xl leading-none ml-0.5 sm:ml-1 font-semibold text-orange-400">%</span>
           </div>
-          <div className="text-xs mt-1 select-none">cheaper</div>
-        </div>
+          <div className="text-xs sm:text-sm text-gray-300 mt-0.5 sm:mt-1">cheaper than competitors</div>
+        </motion.div>
 
-        {/* === Right Card === */}
-        <div className="relative rounded-2xl border border-orange-500 shadow-[0_0_6px_#f97316] bg-gradient-to-b from-[#3a2205] to-[#1a0f00] p-6 flex flex-col justify-between text-white">
+        {/* === Right Card - Donut Chart === */}
+        <motion.div 
+          className="relative rounded-2xl border border-orange-500 shadow-[0_0_6px_#f97316] bg-gradient-to-b from-[#3a2205] to-[#1a0f00] p-6 flex flex-col justify-between text-white"
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={cardVariants}
+          transition={{ delay: 0.2 }}
+        >
           <button
             aria-label="Expand details"
-            className="absolute top-4 right-4 w-7 h-7 rounded-full bg-[#3a2205] text-orange-500 flex items-center justify-center text-lg font-bold leading-none select-none"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#3a2205] text-orange-500 flex items-center justify-center text-base sm:text-lg font-bold leading-none select-none z-10 hover:bg-orange-600 hover:text-white active:scale-95 transition-all duration-200"
           >
             +
           </button>
-          <p className="text-sm leading-relaxed mb-4">
+          <p className="text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 text-gray-200">
             Save up to 5–10 hours weekly managing your portfolio.
           </p>
-          <div className="relative w-full h-36 mb-6 flex justify-center items-end">
-            <svg viewBox="0 0 300 120" className="w-full h-full">
-              <defs>
-                <linearGradient
-                  id="orangeGradient3"
-                  x1="0"
-                  y1="0"
-                  x2="0"
-                  y2="1"
-                >
-                  <stop offset="0%" stopColor="#f97316" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#f97316" stopOpacity="0.3" />
-                </linearGradient>
-              </defs>
-              {/* Semi-circle curve */}
-              <path
-                d="M30 110 Q150 10 270 110"
-                stroke="#f97316"
-                strokeWidth="2"
-                fill="url(#orangeGradient3)"
-              />
-            </svg>
-            <div className="absolute top-10 left-1/2 -translate-x-1/2 bg-orange-600 text-white text-xs font-semibold rounded-full px-3 py-1">
-              With Titan
+          <div className="relative w-full h-40 sm:h-48 mb-4 sm:mb-6 flex items-center justify-center">
+            <div className="w-32 h-32 sm:w-40 sm:h-40 relative">
+              <Doughnut data={donutChartData} options={donutChartOptions} />
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <span className="text-2xl sm:text-3xl font-bold text-orange-400">100%</span>
+                <span className="text-[10px] sm:text-xs text-gray-300">Time Saved</span>
+              </div>
             </div>
           </div>
-          <div className="flex items-baseline font-light select-none">
-            <span className="text-[5.5rem] leading-none font-bold">100</span>
-            <span className="text-2xl leading-none ml-1 font-semibold">%</span>
+          <div className="flex items-baseline font-light select-none justify-center">
+            <span className="text-[4rem] sm:text-[5.5rem] leading-none font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">
+              100
+            </span>
+            <span className="text-xl sm:text-2xl leading-none ml-0.5 sm:ml-1 font-semibold text-orange-400">%</span>
           </div>
-          <div className="text-xs mt-1 select-none">time saved</div>
-        </div>
+          <div className="text-xs sm:text-sm text-gray-300 text-center mt-0.5 sm:mt-1">efficiency gain</div>
+        </motion.div>
       </div>
     </div>
   );
