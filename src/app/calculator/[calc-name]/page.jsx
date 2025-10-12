@@ -385,21 +385,26 @@ const CalculatorPage = () => {
     });
 
     return (
-        <div className="mt-20">
-            <section className="px-4 sm:px-6 lg:px-8 py-8 sm:pt-12 lg:py-16 max-w-[90vw] mx-auto flex flex-col lg:flex-row lg:justify-between lg:items-startpb-6 sm:pb-8 lg:pb-12 mb-8 sm:mb-12">
-                <div className="mb-6 lg:mb-0">
-                    <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-light leading-tight tracking-wide uppercase">
-                        {calculator.name}<br/>Calculator
-                    </h1>
-                </div>
-                <div className="lg:max-w-md xl:max-w-lg">
-                    <p className="text-gray-400 text-base sm:text-lg leading-relaxed">
-                        {calculator.description}
-                    </p>
+        <div className="min-h-screen bg-black text-white">
+            {/* Header Section */}
+            <section className="px-6 md:px-12 lg:px-20 pt-24 pb-12 max-w-7xl mx-auto border-b border-gray-800">
+                <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8">
+                    <div className="lg:max-w-md">
+                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light leading-tight tracking-wide uppercase">
+                            {calculator.name}<br/>CALC
+                        </h1>
+                    </div>
+                    <div className="lg:max-w-lg">
+                        <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+                            {calculator.description}
+                        </p>
+                    </div>
                 </div>
             </section>
-            <main className="min-h-screen bg-black text-white flex items-center justify-center p-6 md:p-12">
-                <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-10 w-full max-w-7xl">
+
+            {/* Calculator Section */}
+            <main className="px-6 md:px-12 lg:px-20 py-12 max-w-7xl mx-auto">
+                <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-10 w-full">
                     {/* Inputs */}
                     <section className="w-full md:w-1/2 flex flex-col justify-between px-3 flex-1 min-h-[500px]">
                         <div className="flex flex-col gap-12">
@@ -407,7 +412,7 @@ const CalculatorPage = () => {
                                 <div key={param.name}>
                                     <label
                                         htmlFor={param.name}
-                                        className="block text-sm font-medium mb-2 text-gray-300 capitalize"
+                                        className="block text-xs uppercase tracking-wider mb-3 text-gray-400"
                                     >
                                         {param.name.replace(/_/g, ' ')}
                                     </label>
@@ -418,11 +423,11 @@ const CalculatorPage = () => {
                                             value={form[param.name]}
                                             onChange={handleChange}
                                             required
-                                            className="w-full p-3 bg-transparent border border-gray-500 rounded-md text-white capitalize placeholder-gray-500 focus:ring-2 focus:ring-white"
+                                            className="w-full p-4 bg-transparent border border-gray-700 rounded-sm text-white capitalize placeholder-gray-500 focus:outline-none focus:border-gray-500 transition-colors"
                                         >
-                                            <option value="">Choose...</option>
+                                            <option value="" className="bg-black">Choose...</option>
                                             {param.options.map(opt => (
-                                                <option key={opt} value={opt}>{opt}</option>
+                                                <option key={opt} value={opt} className="bg-black">{opt}</option>
                                             ))}
                                         </select>
                                     ) : (
@@ -433,7 +438,8 @@ const CalculatorPage = () => {
                                             value={form[param.name]}
                                             onChange={handleChange}
                                             required
-                                            className="w-full p-3 bg-transparent border border-gray-500 rounded-md text-white placeholder-gray-500 focus:ring-2 focus:ring-white"
+                                            placeholder={param.type === "number" ? "Ex. 50000" : ""}
+                                            className="w-full p-4 bg-transparent border border-gray-700 rounded-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-500 transition-colors"
                                         />
                                     )}
                                 </div>
@@ -441,20 +447,20 @@ const CalculatorPage = () => {
                         </div>
 
                         {/* Buttons */}
-                        <div className="flex flex-col gap-4 mt-6">
+                        <div className="flex flex-col gap-4 mt-8">
                             <button
                                 type="submit"
-                                className="w-full p-3 bg-white text-black font-medium rounded-md hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-full p-4 bg-white text-black font-medium rounded-sm hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed uppercase text-sm tracking-wide"
                                 disabled={!isValid}
                             >
-                                CALCULATE
+                                Plan My Future Value
                             </button>
                             <button
                                 type="button"
                                 onClick={handleReset}
-                                className="w-full p-3 border border-gray-500 text-white rounded-md hover:bg-gray-800 transition-colors"
+                                className="w-full p-4 border border-gray-700 text-white rounded-sm hover:bg-gray-900 transition-colors uppercase text-sm tracking-wide"
                             >
-                                RESET
+                                Reset
                             </button>
                         </div>
                     </section>
@@ -475,56 +481,56 @@ const CalculatorPage = () => {
                         </div>
 
                         {/* Summary Box */}
-                        <div className={`bg-[#1a1a1a] border border-gray-700 rounded-lg p-6 transition-opacity relative ${!isSubmitted ? 'opacity-50' : ''}`}>
+                        <div className={`bg-[#1a1a1a] border border-gray-700 rounded-sm p-6 transition-opacity relative ${!isSubmitted ? 'opacity-50' : ''}`}>
                             {!isSubmitted ? (
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     <p className="text-gray-500 text-sm">Results will appear here</p>
                                 </div>
                             ) : (
-                                <div>
+                                <div className="space-y-4">
                                     {calculator.slug === 'time-duration-calculator' ? (
                                         <>
-                                            <div className="flex justify-between mb-2">
-                                                <span className="text-gray-400">Total Days:</span>
-                                                <span className="font-semibold">{(result?.totalDays || 0).toLocaleString()}</span>
+                                            <div className="flex justify-between items-center py-2">
+                                                <span className="text-gray-400 text-sm">Total Days:</span>
+                                                <span className="font-semibold text-lg">{(result?.totalDays || 0).toLocaleString()}</span>
                                             </div>
-                                            <div className="flex justify-between mb-2">
-                                                <span className="text-gray-400">Approx Months:</span>
-                                                <span className="font-semibold">{(result?.totalMonths || 0).toLocaleString()}</span>
+                                            <div className="flex justify-between items-center py-2 border-t border-gray-800">
+                                                <span className="text-gray-400 text-sm">Approx Months:</span>
+                                                <span className="font-semibold text-lg">{(result?.totalMonths || 0).toLocaleString()}</span>
                                             </div>
-                                            <div className="flex justify-between">
-                                                <span className="text-gray-400">Approx Years:</span>
-                                                <span className="font-semibold">{(result?.totalYears || 0).toFixed(2)}</span>
+                                            <div className="flex justify-between items-center py-2 border-t border-gray-800">
+                                                <span className="text-gray-400 text-sm">Approx Years:</span>
+                                                <span className="font-semibold text-lg">{(result?.totalYears || 0).toFixed(2)}</span>
                                             </div>
                                         </>
                                     ) : calculator.slug === 'stock-market-vs-fd-calculator' ? (
                                         <>
-                                            <div className="flex justify-between mb-2">
-                                                <span className="text-gray-400">Stock Value:</span>
-                                                <span className="font-semibold">₹{(result?.corpusValue || 0).toLocaleString()}</span>
+                                            <div className="flex justify-between items-center py-2">
+                                                <span className="text-gray-400 text-sm">Stock Value:</span>
+                                                <span className="font-semibold text-lg">₹{(result?.corpusValue || 0).toLocaleString()}</span>
                                             </div>
-                                            <div className="flex justify-between mb-2">
-                                                <span className="text-gray-400">FD Value:</span>
-                                                <span className="font-semibold">₹{(result?.fdValue || 0).toLocaleString()}</span>
+                                            <div className="flex justify-between items-center py-2 border-t border-gray-800">
+                                                <span className="text-gray-400 text-sm">FD Value:</span>
+                                                <span className="font-semibold text-lg">₹{(result?.fdValue || 0).toLocaleString()}</span>
                                             </div>
-                                            <div className="flex justify-between">
-                                                <span className="text-gray-400">Total Deposited:</span>
-                                                <span className="font-semibold">₹{(result?.totalDeposited || 0).toLocaleString()}</span>
+                                            <div className="flex justify-between items-center py-2 border-t border-gray-800">
+                                                <span className="text-gray-400 text-sm">Total Deposited:</span>
+                                                <span className="font-semibold text-lg">₹{(result?.totalDeposited || 0).toLocaleString()}</span>
                                             </div>
                                         </>
                                     ) : (
                                         <>
-                                            <div className="flex justify-between mb-2">
-                                                <span className="text-gray-400">Corpus Value:</span>
-                                                <span className="font-semibold">₹{(result?.corpusValue || 0).toLocaleString()}</span>
+                                            <div className="flex justify-between items-center py-2">
+                                                <span className="text-gray-400 text-sm">Your Corpus Value:</span>
+                                                <span className="font-bold text-xl">₹{(result?.corpusValue || 0).toLocaleString()}</span>
                                             </div>
-                                            <div className="flex justify-between mb-2">
-                                                <span className="text-gray-400">Total Earnings:</span>
-                                                <span className="font-semibold text-green-400">₹{(result?.totalEarnings || 0).toLocaleString()}</span>
+                                            <div className="flex justify-between items-center py-2 border-t border-gray-800">
+                                                <span className="text-gray-400 text-sm">Total Earnings:</span>
+                                                <span className="font-semibold text-lg text-green-400">₹{(result?.totalEarnings || 0).toLocaleString()}</span>
                                             </div>
-                                            <div className="flex justify-between">
-                                                <span className="text-gray-400">Total Deposited:</span>
-                                                <span className="font-semibold">₹{(result?.totalDeposited || 0).toLocaleString()}</span>
+                                            <div className="flex justify-between items-center py-2 border-t border-gray-800">
+                                                <span className="text-gray-400 text-sm">Total Deposited Amount:</span>
+                                                <span className="font-semibold text-lg">₹{(result?.totalDeposited || 0).toLocaleString()}</span>
                                             </div>
                                         </>
                                     )}
@@ -534,6 +540,35 @@ const CalculatorPage = () => {
                     </section>
                 </form>
             </main>
+
+            {/* About Section */}
+            <section className="px-6 md:px-12 lg:px-20 py-16 max-w-7xl mx-auto border-t border-gray-800">
+                <h2 className="text-3xl md:text-4xl font-light mb-12 text-center uppercase tracking-wide">
+                    About {calculator.name} Calc
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                    <div>
+                        <h3 className="text-lg font-semibold mb-4">What is a {calculator.name} Investment?</h3>
+                        <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                            {calculator.description}
+                        </p>
+                        <h3 className="text-lg font-semibold mb-4">How does this {calculator.name} Calculator work?</h3>
+                        <p className="text-gray-400 text-sm leading-relaxed">
+                            Our {calculator.name.toLowerCase()} calculator is so convenient to use that even a layman can use it. All you need to do is enter the required inputs such as {calculator.params.slice(0, 2).map(p => p.name.replace(/_/g, ' ')).join(', ')}, and the expected rate of return you are willing to stay invested and, the expected rate of return that you think the investment will generate. After entering the required values, the calculator will give you the future value of your investments.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 className="text-lg font-semibold mb-4">What is {calculator.name} Calculator?</h3>
+                        <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                            With {calculator.name} Calculator, you can calculate the maturity value of your investment made today at a certain rate of interest. For example, if you invest ₹1,00,000 today for 10 years at 12% rate of interest, the {calculator.name.toLowerCase()} calculator tells you the future value of your investment made today will be ₹3,10,584.82 after 10 years.
+                        </p>
+                        <h3 className="text-lg font-semibold mb-4">When should one prefer {calculator.name} Investment?</h3>
+                        <p className="text-gray-400 text-sm leading-relaxed">
+                            Ideally any investment (whether lumpsum or SIP) should be done keeping in mind your financial goals, time horizon, and risk appetite. {calculator.name} investment is preferred when one has large amount of surplus funds and more importantly if he/she is willing to stay invested for a longer period. Therefore, the return on {calculator.name.toLowerCase()} investment done over a longer period helps generate compounding rate of returns.
+                        </p>
+                    </div>
+                </div>
+            </section>
         </div>
 
     );
