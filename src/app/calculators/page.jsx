@@ -8,7 +8,7 @@ import { calculators } from '../calculator/calc-data';
 const CalculatorCard = ({ name, description, slug, image }) => {
   return (
     <Link href={`/calculator/${slug}`}>
-      <div className="relative overflow-hidden rounded-sm group cursor-pointer h-[300px] md:h-[350px]">
+      <div className="relative  overflow-hidden rounded-sm group cursor-pointer h-[300px] md:h-[350px]">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
@@ -39,9 +39,9 @@ const CalculatorCard = ({ name, description, slug, image }) => {
 
 export default function CalculatorsPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen pt-20 bg-black text-white">
       {/* Header Section */}
-      <section className="px-6 md:px-12 lg:px-20 py-16 md:py-24 max-w-7xl mx-auto">
+      <section className=" py-16 md:py-24 max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8 md:gap-16 mb-12">
           <div className="lg:max-w-md">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-light leading-tight tracking-wide">
