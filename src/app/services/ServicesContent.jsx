@@ -18,21 +18,21 @@ const ServiceCard = ({ title, description, slug }) => {
 
 const ServicesContent = () => {
   const stats = [
-    { value: '25+', unit: 'YEARS' },
-    { value: '₹3,500', unit: 'CR' },
-    { value: '1000+', unit: 'CLIENTS' },
-    { value: '500+', unit: 'ANNUALLY' },
-    { value: '150+', unit: 'GLOBALLY' },
+    { heading: 'Market Experience',value: '25+' ,unit: 'YEARS' },
+    { heading: 'Portfolios Managed',value: '₹3,500' ,unit: 'CR' },
+    { heading: 'Clients Served',value: '1000+' ,unit: 'CLIENTS' },
+    { heading: 'Traders Mentored',value: '500+' ,unit: 'ANNUALLY' },
+    { heading: 'Training Sessions',value: '150+' ,unit: 'GLOBALLY' },
   ];
 
   const services = servicesData;
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="pt-50 min-h-screen bg-black text-white">
       {/* Background Image */}
       <div className="relative w-full">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black z-10" />
-        <div className="relative h-[40vh] md:h-[50vh]">
+        <div className="" />
+        {/* <div className="relative h-[40vh] md:h-[50vh]">
           <Image
             src="/sky.jpg"
             alt="Background"
@@ -40,10 +40,10 @@ const ServicesContent = () => {
             className="object-cover"
             priority
           />
-        </div>
+        </div> */}
 
         {/* Header Section - Overlaid on image */}
-        <div className="absolute inset-0 z-20 flex items-center">
+        <div className="flex items-center">
           <div className="container mx-auto px-6 md:px-12 lg:px-20">
             <div className="max-w-7xl mx-auto">
               <div className="text-gray-400 text-xs md:text-sm mb-4 tracking-wider">SERVICES</div>
@@ -63,41 +63,36 @@ const ServicesContent = () => {
           </div>
         </div>
       </div>
-
-      {/* Main Content */}
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16">
-        <div className="max-w-7xl mx-auto">
-          {/* Stats Section */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 mb-16 md:mb-20">
+      <div className="border-b-[1px] p-8"></div>
+       {/* Stats Section */}
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 flex justify-center items-center">
+        <div className="max-w-7xl mx-auto h-full">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 mb-16 md:mb-20 h-full">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl lg:text-5xl text-white font-light mb-2">
-                  {stat.value}
+              <div key={index} className="text-center h-full">
+                <div className="text-gray-400 text-xs md:text-sm tracking-wide text-left ">
+                  {stat.heading}
                 </div>
-                <div className="text-gray-400 text-xs md:text-sm tracking-wide">
-                  {stat.unit}
+                <div className="text-gray-400 flex text-xs md:text-sm tracking-wide h-full">
+                      <div className="text-4xl md:text-5xl lg:text-6xl text-white font-light mb-2">
+                        {stat.value}
+                      </div>
+                      <div className="self-end text-gray-400 text-sm md:text-sm tracking-wide">
+                        {stat.unit}
+                      </div>
                 </div>
+              
               </div>
             ))}
           </div>
-
-          {/* NORTHPOLE Banner */}
-          <div className="relative bg-gradient-to-br from-gray-100 to-white rounded-sm p-8 md:p-12 lg:p-16 mb-16 md:mb-20 overflow-hidden">
-            <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-              <div>
-                <div className="text-blue-600 text-xs md:text-sm mb-3 md:mb-4 tracking-wide font-medium">
-                  WE OFFER MULTIPLE SERVICES AT
-                </div>
-                <div className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-black tracking-tight">
-                  NORTHPOLE
-                </div>
-              </div>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-sm transition-colors text-sm font-medium tracking-wide">
-                EXPLORE
-              </button>
-            </div>
-          </div>
-
+        </div>
+      </div>  
+      {/* NORTHPOLE Banner */}
+      <Image src="/northpole_banner.png" alt="Northpole Banner  " width={1920} height={1080} className= "w-screen overflow-hidden mb-12" />
+      {/* Main Content */}
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16">
+        <div className="max-w-7xl mx-auto">
+          
           {/* Services Grid Section */}
           <div className="mb-12">
             <h2 className="text-2xl md:text-3xl lg:text-4xl text-white font-light mb-2 leading-tight">

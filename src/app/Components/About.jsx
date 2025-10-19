@@ -9,7 +9,7 @@ export default function About() {
                     <div className="flex flex-col gap-6 lg:gap-8 p-6 lg:p-8">
                         <h1 className="text-3xl md:text-4xl font-bold text-white">Kalpesh Patel</h1>
                         <p className="text-gray-400 text-base md:text-lg">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam id optio animi nulla dolores modi hic possimus quisquam! Fugiat doloremque deleniti suscipit dicta consectetur tempora delectus animi.
+                            Kalpesh Patel is a NISM-certified Research Analyst, Wealth Creator, and founder of Northpole Wealth. With over 25 years of stock market experience, he has helped thousands of individuals achieve their financial goals through a disciplined, goal-based approach. Known for his systematic strategies and mentorship, Kalpesh Patel is a recognized expert across media and financial circles.
                         </p>
                     </div>
 
@@ -17,10 +17,9 @@ export default function About() {
                     <div className="bg-white rounded-2xl p-6 flex flex-col gap-6">
                         <div className="flex-1 flex flex-col justify-between gap-6">
                             <div>
-                                <h1 className="text-3xl md:text-4xl font-bold text-black">23 Years +</h1>
+                                <h1 className="text-3xl md:text-4xl font-bold text-black">25 Years +</h1>
                                 <p className="text-gray-600 mt-2 text-base md:text-lg">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Est officiis labore enim, voluptas distinctio molestiae autem quis ab dicta a!
-                                </p>
+                                    Over 25 years of experience in financial markets                                </p>
                             </div>
                             <div className="aspect-[4/3] w-full rounded-xl overflow-hidden bg-gray-100">
                                 <img 
