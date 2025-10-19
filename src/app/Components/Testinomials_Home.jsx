@@ -101,46 +101,50 @@ const Testimonials_Home = () => {
   }, []);
 
   return (
-    <div className="bg-[#0a0a0a] text-white max-w-[90rem] mx-auto px-6 py-20 flex flex-col">
-      {/* Header */}
-      <div className="flex justify-between items-start border-b border-gray-700 pb-12 mb-12">
-        <h2 className="max-w-4xl text-[3.5rem] leading-[1.1] font-light text-gray-400">
-          What our connection feels{" "}
-          <strong className="text-white font-extrabold">about us</strong>
-        </h2>
-        <span className="text-xs font-semibold tracking-widest text-white self-start mt-3">
-          TESTIMONIALS
-        </span>
-      </div>
+    <div className="w-full text-white py-20 md:py-28 lg:py-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="flex justify-between items-start border-b border-gray-800 pb-8 mb-16">
+          <h2 className="max-w-2xl text-4xl md:text-5xl lg:text-6xl leading-tight font-light text-gray-400">
+            What our connection feels{" "}
+            <span className="text-white font-normal">about us</span>
+          </h2>
+          <span className="text-xs font-normal tracking-widest text-white self-start mt-2">
+            TESTIMONIALS
+          </span>
+        </div>
 
-      {/* Carousel */}
-      <div className="relative w-full max-w-full overflow-hidden">
-        <div className="embla" ref={emblaRef}>
-          <div className="embla__container">
-            {testimonials.map((item, index) => (
-              <div key={index} className="embla__slide">
-                <article className="bg-[#f7f7f7] rounded-lg p-6 w-full max-w-[300px] mx-auto text-gray-400">
-                  <img
-                    alt={item.name}
-                    className="w-12 h-12 rounded-full mb-6"
-                    src={item.img}
-                    width="48"
-                    height="48"
-                  />
-                  <p className="mb-6 text-sm leading-relaxed font-light">
-                    {item.text}
-                  </p>
-                  <footer>
-                    <p className="font-gv text-2xl text-gray-900 mb-1">
-                      {item.name}
-                    </p>
-                    <p className="text-[0.625rem] uppercase text-gray-400 font-light tracking-wide">
-                      {item.role}
-                    </p>
-                  </footer>
-                </article>
-              </div>
-            ))}
+        {/* Carousel */}
+        <div className="relative w-full overflow-hidden">
+          <div className="embla" ref={emblaRef}>
+            <div className="embla__container gap-6">
+              {testimonials.map((item, index) => (
+                <div key={index} className="embla__slide">
+                  <article className="bg-white rounded-lg p-8 h-full flex flex-col justify-between min-h-[450px] hover:shadow-xl transition-shadow duration-300">
+                    <div>
+                      <img
+                        alt={item.name}
+                        className="w-12 h-12 rounded-full mb-6 object-cover"
+                        src={item.img}
+                        width="48"
+                        height="48"
+                      />
+                      <p className="mb-8 text-sm md:text-base leading-relaxed text-gray-600">
+                        {item.text}
+                      </p>
+                    </div>
+                    <footer className="mt-auto">
+                      <p className="text-2xl md:text-3xl text-black mb-1 font-serif italic">
+                        {item.name}
+                      </p>
+                      <p className="text-xs uppercase text-gray-500 tracking-wide">
+                        {item.role}
+                      </p>
+                    </footer>
+                  </article>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -47,7 +47,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="mt-20 sm:mt-28 md:mt-32 text-center">
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-wide">
+        <h1 className="text-[12vw] font-extrabold tracking-wide">
           NORTHPOLE
         </h1>
       </div>

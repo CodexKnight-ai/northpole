@@ -337,108 +337,94 @@ const Stats = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-black via-[#1a0f00] to-black min-h-screen flex items-center justify-center p-4 sm:p-6 font-inter">
-      <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-        {/* === Left Card - Line Chart === */}
-        <motion.div 
-          className="relative rounded-xl sm:rounded-2xl border border-orange-500 shadow-[0_0_6px_#f97316] bg-gradient-to-b from-[#3a2205] to-[#1a0f00] p-4 sm:p-6 flex flex-col justify-between text-white h-full"
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: true, amount: 0.1 }}
-          variants={cardVariants}
-        >
-          <button
-            aria-label="Expand details"
-            className="absolute top-3 right-3 sm:top-4 sm:right-4 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#3a2205] text-orange-500 flex items-center justify-center text-base sm:text-lg font-bold leading-none select-none z-10 hover:bg-orange-600 hover:text-white active:scale-95 transition-all duration-200"
+    <div className="w-full py-20 md:py-28 lg:py-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Title */}
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-white text-center mb-12 md:mb-16">
+          "Why work with real advisor?"
+        </h2>
+        
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {/* === Left Card - Line Chart === */}
+          <motion.div 
+            className="relative rounded-lg bg-black  p-6 flex flex-col justify-between text-white h-full hover:border-gray-700 transition-colors duration-300"
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={cardVariants}
           >
-            +
-          </button>
-          <p className="text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 text-gray-200">
-            Titan clients have historically compounded their wealth at an
-            average of 10.72% /year. Composite performance represents the net
-            annualized return from 2/20/18 through 12/31/24.
-            <span className="block mt-1 text-orange-300">Tap '+' for details</span>
-          </p>
-          <div className="relative w-full h-40 sm:h-48 mb-4 sm:mb-6">
-            <Line data={lineChartData} options={lineChartOptions} />
-            <div className="absolute top-1 sm:top-2 right-1 sm:right-2 bg-orange-600/90 text-white text-[10px] sm:text-xs font-semibold rounded-full px-2 sm:px-3 py-0.5 sm:py-1 backdrop-blur-sm">
-              +10.72% YoY
-            </div>
-          </div>
-          <div className="flex items-baseline font-light select-none">
-            <span className="text-[4rem] sm:text-[5.5rem] leading-none font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">
-              10.72
-            </span>
-            <span className="text-xl sm:text-2xl leading-none ml-0.5 sm:ml-1 font-semibold text-orange-400">%</span>
-          </div>
-          <div className="text-xs sm:text-sm text-gray-300 mt-0.5 sm:mt-1">Average Annual Return</div>
-        </motion.div>
-
-        {/* === Middle Card - Bar Chart === */}
-        <motion.div 
-          className="relative rounded-2xl border border-orange-500 shadow-[0_0_6px_#f97316] bg-gradient-to-b from-[#3a2205] to-[#1a0f00] p-6 flex flex-col justify-between text-white"
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={cardVariants}
-          transition={{ delay: 0.1 }}
-        >
-          <button
-            aria-label="Expand details"
-            className="absolute top-3 right-3 sm:top-4 sm:right-4 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#3a2205] text-orange-500 flex items-center justify-center text-base sm:text-lg font-bold leading-none select-none z-10 hover:bg-orange-600 hover:text-white active:scale-95 transition-all duration-200"
-          >
-            +
-          </button>
-          <p className="text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 text-gray-200">
-            Better value than a typical private wealth manager.
-          </p>
-          <div className="relative w-full h-40 sm:h-48 mb-4 sm:mb-6">
-            <Bar data={barChartData} options={barChartOptions} />
-          </div>
-          <div className="flex items-baseline font-light select-none">
-            <span className="text-[4rem] sm:text-[5.5rem] leading-none font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">
-              50
-            </span>
-            <span className="text-xl sm:text-2xl leading-none ml-0.5 sm:ml-1 font-semibold text-orange-400">%</span>
-          </div>
-          <div className="text-xs sm:text-sm text-gray-300 mt-0.5 sm:mt-1">cheaper than competitors</div>
-        </motion.div>
-
-        {/* === Right Card - Donut Chart === */}
-        <motion.div 
-          className="relative rounded-2xl border border-orange-500 shadow-[0_0_6px_#f97316] bg-gradient-to-b from-[#3a2205] to-[#1a0f00] p-6 flex flex-col justify-between text-white"
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={cardVariants}
-          transition={{ delay: 0.2 }}
-        >
-          <button
-            aria-label="Expand details"
-            className="absolute top-3 right-3 sm:top-4 sm:right-4 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#3a2205] text-orange-500 flex items-center justify-center text-base sm:text-lg font-bold leading-none select-none z-10 hover:bg-orange-600 hover:text-white active:scale-95 transition-all duration-200"
-          >
-            +
-          </button>
-          <p className="text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 text-gray-200">
-            Save up to 5–10 hours weekly managing your portfolio.
-          </p>
-          <div className="relative w-full h-40 sm:h-48 mb-4 sm:mb-6 flex items-center justify-center">
-            <div className="w-32 h-32 sm:w-40 sm:h-40 relative">
-              <Doughnut data={donutChartData} options={donutChartOptions} />
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-2xl sm:text-3xl font-bold text-orange-400">100%</span>
-                <span className="text-[10px] sm:text-xs text-gray-300">Time Saved</span>
+            <p className="text-sm leading-relaxed mb-4 text-gray-400">
+              Northpole Wealth clients have historically compounded their wealth at an average of 10.72% per year through disciplined, goal-based strategies.
+            </p>
+            <div className="relative w-full h-48 mb-6">
+              <Line data={lineChartData} options={lineChartOptions} />
+              <div className="absolute top-2 right-2 bg-blue-600/90 text-white text-xs font-medium rounded px-3 py-1 backdrop-blur-sm">
+                +10.72% YoY
               </div>
             </div>
-          </div>
-          <div className="flex items-baseline font-light select-none justify-center">
-            <span className="text-[4rem] sm:text-[5.5rem] leading-none font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">
-              100
-            </span>
-            <span className="text-xl sm:text-2xl leading-none ml-0.5 sm:ml-1 font-semibold text-orange-400">%</span>
-          </div>
-          <div className="text-xs sm:text-sm text-gray-300 text-center mt-0.5 sm:mt-1">efficiency gain</div>
-        </motion.div>
+            <div className="flex items-baseline font-light select-none">
+              <span className="text-6xl sm:text-7xl leading-none font-light text-white">
+                10.72
+              </span>
+              <span className="text-2xl leading-none ml-1 font-light text-gray-400">%</span>
+            </div>
+            <div className="text-sm text-gray-400 mt-2">Average Annual Return</div>
+          </motion.div>
+
+          {/* === Middle Card - Bar Chart === */}
+          <motion.div 
+            className="relative rounded-lg bg-black p-6 flex flex-col justify-between text-white hover:border-gray-700 transition-colors duration-300"
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={cardVariants}
+            transition={{ delay: 0.1 }}
+          >
+            <p className="text-sm leading-relaxed mb-4 text-gray-400">
+              Better value than typical wealth managers with transparent pricing and no hidden fees.
+            </p>
+            <div className="relative w-full h-48 mb-6">
+              <Bar data={barChartData} options={barChartOptions} />
+            </div>
+            <div className="flex items-baseline font-light select-none">
+              <span className="text-6xl sm:text-7xl leading-none font-light text-white">
+                50
+              </span>
+              <span className="text-2xl leading-none ml-1 font-light text-gray-400">%</span>
+            </div>
+            <div className="text-sm text-gray-400 mt-2">More cost-effective</div>
+          </motion.div>
+
+          {/* === Right Card - Donut Chart === */}
+          <motion.div 
+            className="relative rounded-lg bg-black p-6 flex flex-col justify-between text-white hover:border-gray-700 transition-colors duration-300"
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={cardVariants}
+            transition={{ delay: 0.2 }}
+          >
+            <p className="text-sm leading-relaxed mb-4 text-gray-400">
+              Save 5–10 hours weekly with our automated portfolio management and expert guidance.
+            </p>
+            <div className="relative w-full h-48 mb-6 flex items-center justify-center">
+              <div className="w-40 h-40 relative">
+                <Doughnut data={donutChartData} options={donutChartOptions} />
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <span className="text-3xl font-light text-white">100%</span>
+                  <span className="text-xs text-gray-400">Time Saved</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-baseline font-light select-none justify-center">
+              <span className="text-6xl sm:text-7xl leading-none font-light text-white">
+                100
+              </span>
+              <span className="text-2xl leading-none ml-1 font-light text-gray-400">%</span>
+            </div>
+            <div className="text-sm text-gray-400 text-center mt-2">Efficiency gain</div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );

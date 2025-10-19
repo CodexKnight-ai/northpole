@@ -62,7 +62,7 @@ export default function Milestones() {
   };
 
   return (
-    <div className="relative w-full py-16 md:py-24 overflow-hidden bg-black">
+    <div className="relative w-full py-16 md:py-24 overflow-hidden">
       <style jsx>{`
         @keyframes fadeIn {
           from {

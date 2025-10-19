@@ -2,7 +2,7 @@
 
 export default function About() {
     return (
-        <section className="w-full py-16 md:py-24 lg:py-32 bg-black">
+        <section className="w-full py-16 md:py-24 lg:py-32 ">
             <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
                     {/* Left Column */}

@@ -65,7 +65,7 @@ const ServicesContent = () => {
       </div>
       <div className="border-b-[1px] p-8"></div>
        {/* Stats Section */}
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 flex justify-center items-center">
+      <div className="container mx-auto pt-14 px-6 md:px-12 lg:px-20 flex justify-center items-center">
         <div className="max-w-7xl mx-auto h-full">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 mb-16 md:mb-20 h-full">
             {stats.map((stat, index) => (
