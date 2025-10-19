@@ -5,7 +5,7 @@ import { FaInstagram, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 export default function ContactPage() {
     return (
-        <main className="min-h-screen bg-black text-white">
+        <main className="min-h-screen bg-[#0D0D0D] text-white">
             {/* Hero Section with Background Image */}
             <section className="relative w-full h-[60vh] md:h-[70vh]">
                 <Image

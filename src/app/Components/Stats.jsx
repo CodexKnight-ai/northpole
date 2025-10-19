@@ -347,82 +347,84 @@ const Stats = () => {
         <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* === Left Card - Line Chart === */}
           <motion.div 
-            className="relative rounded-lg bg-black  p-6 flex flex-col justify-between text-white h-full hover:border-gray-700 transition-colors duration-300"
+            className="relative rounded-lg bg-black p-6 flex flex-col text-white h-full hover:border-gray-700 transition-colors duration-300"
             initial="offscreen"
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.1 }}
             variants={cardVariants}
           >
-            <p className="text-sm leading-relaxed mb-4 text-gray-400">
-              Northpole Wealth clients have historically compounded their wealth at an average of 10.72% per year through disciplined, goal-based strategies.
-            </p>
-            <div className="relative w-full h-48 mb-6">
-              <Line data={lineChartData} options={lineChartOptions} />
-              <div className="absolute top-2 right-2 bg-blue-600/90 text-white text-xs font-medium rounded px-3 py-1 backdrop-blur-sm">
-                +10.72% YoY
+            <div className="mb-4">
+              <div className="text-xs text-gray-500 mb-2">1</div>
+              <h3 className="text-lg font-light text-gray-300 mb-4">Years of Market Experience</h3>
+              <div className="flex items-baseline mb-6">
+                <span className="text-5xl font-light text-white">25</span>
+                <span className="text-2xl font-light text-gray-400 ml-1">+</span>
               </div>
             </div>
-            <div className="flex items-baseline font-light select-none">
-              <span className="text-6xl sm:text-7xl leading-none font-light text-white">
-                10.72
-              </span>
-              <span className="text-2xl leading-none ml-1 font-light text-gray-400">%</span>
+            <div className="relative w-full h-48 mb-4">
+              <Line data={lineChartData} options={lineChartOptions} />
             </div>
-            <div className="text-sm text-gray-400 mt-2">Average Annual Return</div>
+            <p className="text-sm leading-relaxed text-gray-400">
+              A line graph can represent steady growth and experience accumulation from Year 1 to Year 25.
+            </p>
           </motion.div>
 
-          {/* === Middle Card - Bar Chart === */}
+          {/* === Middle Card - Donut Chart === */}
           <motion.div 
-            className="relative rounded-lg bg-black p-6 flex flex-col justify-between text-white hover:border-gray-700 transition-colors duration-300"
+            className="relative rounded-lg bg-black p-6 flex flex-col text-white hover:border-gray-700 transition-colors duration-300"
             initial="offscreen"
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.2 }}
             variants={cardVariants}
             transition={{ delay: 0.1 }}
           >
-            <p className="text-sm leading-relaxed mb-4 text-gray-400">
-              Better value than typical wealth managers with transparent pricing and no hidden fees.
-            </p>
-            <div className="relative w-full h-48 mb-6">
-              <Bar data={barChartData} options={barChartOptions} />
+            <div className="mb-4">
+              <div className="text-xs text-gray-500 mb-2">2</div>
+              <h3 className="text-lg font-light text-gray-300 mb-4">Client Success Stories</h3>
+              <div className="flex items-baseline mb-6">
+                <span className="text-5xl font-light text-white">1,000</span>
+                <span className="text-2xl font-light text-gray-400 ml-1">+</span>
+              </div>
             </div>
-            <div className="flex items-baseline font-light select-none">
-              <span className="text-6xl sm:text-7xl leading-none font-light text-white">
-                50
-              </span>
-              <span className="text-2xl leading-none ml-1 font-light text-gray-400">%</span>
+            <div className="relative w-full h-48 mb-4 flex items-center justify-center">
+              <div className="w-40 h-40 relative">
+                <Doughnut data={donutChartData} options={donutChartOptions} />
+              </div>
             </div>
-            <div className="text-sm text-gray-400 mt-2">More cost-effective</div>
+            <div className="text-sm leading-relaxed text-gray-400">
+              <p className="font-medium mb-2">Pie Chart</p>
+              <ul className="space-y-1">
+                <li>• Retirement Planning: 40%</li>
+                <li>• Child's Education: 30%</li>
+                <li>• Wealth Creation: 20%</li>
+                <li>• Other Goals: 10%</li>
+              </ul>
+            </div>
           </motion.div>
 
-          {/* === Right Card - Donut Chart === */}
+          {/* === Right Card - Bar Chart === */}
           <motion.div 
-            className="relative rounded-lg bg-black p-6 flex flex-col justify-between text-white hover:border-gray-700 transition-colors duration-300"
+            className="relative rounded-lg bg-black p-6 flex flex-col text-white hover:border-gray-700 transition-colors duration-300"
             initial="offscreen"
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.2 }}
             variants={cardVariants}
             transition={{ delay: 0.2 }}
           >
-            <p className="text-sm leading-relaxed mb-4 text-gray-400">
-              Save 5–10 hours weekly with our automated portfolio management and expert guidance.
-            </p>
-            <div className="relative w-full h-48 mb-6 flex items-center justify-center">
-              <div className="w-40 h-40 relative">
-                <Doughnut data={donutChartData} options={donutChartOptions} />
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-3xl font-light text-white">100%</span>
-                  <span className="text-xs text-gray-400">Time Saved</span>
-                </div>
+            <div className="mb-4">
+              <div className="text-xs text-gray-500 mb-2">3</div>
+              <h3 className="text-lg font-light text-gray-300 mb-4">Portfolios Managed</h3>
+              <div className="flex items-baseline mb-6">
+                <span className="text-5xl font-light text-white">₹3500 Cr</span>
+                <span className="text-2xl font-light text-gray-400 ml-1">+</span>
               </div>
             </div>
-            <div className="flex items-baseline font-light select-none justify-center">
-              <span className="text-6xl sm:text-7xl leading-none font-light text-white">
-                100
-              </span>
-              <span className="text-2xl leading-none ml-1 font-light text-gray-400">%</span>
+            <div className="relative w-full h-48 mb-4">
+              <Bar data={barChartData} options={barChartOptions} />
             </div>
-            <div className="text-sm text-gray-400 text-center mt-2">Efficiency gain</div>
+            <p className="text-sm leading-relaxed text-gray-400">
+              A bar chart can show the growth of Assets Under Management (AUM) over recent years (e.g., 2020, 2021, 2022, 2023, 2024).
+            </p>
           </motion.div>
         </div>
       </div>

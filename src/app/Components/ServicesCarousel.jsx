@@ -64,7 +64,7 @@ export default function ServicesCarousel() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {getVisibleServices().map((service, index) => (
             <Link key={index} href={`/services/${service.slug}`}>
-              <div className="bg-black rounded-lg p-8 h-[350px] flex flex-col justify-between hover:scale-105 transition-transform duration-300 cursor-pointer ">
+              <div className="bg-black rounded-lg p-8 h-[300px] flex flex-col justify-between hover:scale-105 transition-transform duration-300 cursor-pointer ">
                 <div>
                   <h3 className="text-xl md:text-2xl font-light text-white mb-4">
                     {service.title}

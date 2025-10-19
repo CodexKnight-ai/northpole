@@ -39,7 +39,7 @@ const CalculatorCard = ({ name, description, slug, image }) => {
 
 export default function CalculatorsPage() {
   return (
-    <div className="min-h-screen pt-20 bg-black text-white">
+    <div className="min-h-screen pt-20 bg-[#0D0D0D] text-white">
       {/* Header Section */}
       <section className=" py-16 md:py-24 max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8 md:gap-16 mb-12">

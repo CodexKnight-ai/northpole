@@ -22,7 +22,7 @@ const App = (props) => {
   const stats = props.stats || defaultStats;
 
   return (
-    <div className="min-h-screen bg-black text-white p-8  md:p-16 md:pt-52">
+    <div className="min-h-screen bg-[#0D0D0D] text-white p-8  md:p-16 md:pt-52">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-16">
           {/* Left Section */}

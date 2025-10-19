@@ -8,7 +8,7 @@ import { servicesData } from './servicesData';
 const ServiceCard = ({ title, description, slug }) => {
   return (
     <Link href={`/services/${slug}`}>
-      <div className="bg-zinc-900/50 h-[400px] border border-zinc-800 p-6 rounded-sm hover:bg-zinc-800/50 transition-all duration-300 group cursor-pointer">
+      <div className="bg-black h-[400px] p-6 rounded-sm hover:bg-zinc-800/50 transition-all duration-300 group cursor-pointer">
         <h3 className="text-2xl font-normal text-white mb-3 group-hover:text-blue-400 transition-colors">{title}</h3>
         <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
       </div>
@@ -28,7 +28,7 @@ const ServicesContent = () => {
   const services = servicesData;
 
   return (
-    <div className="pt-50 min-h-screen bg-black text-white">
+    <div className="pt-50 min-h-screen bg-[#0D0D0D] text-white">
       {/* Background Image */}
       <div className="relative w-full">
         <div className="" />
