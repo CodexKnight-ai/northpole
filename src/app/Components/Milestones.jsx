@@ -5,22 +5,22 @@ import Image from 'next/image';
 
 const slides = [
   {
-    img: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/71afce28-10bd-4516-84d8-e31321dd953d.png",
+    img: "/award1.jpg",
     alt: "Animated character running on a glowing colorful cosmic trail with planet Saturn and sun flare in the background in space",
     title: "Chief Minister's Award",
     desc: "Honored with the Chief Minister's Award for Finance in 2024, recognizing our commitment to financial excellence and client success."
   },
   {
-    img: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b8508f67-00ac-4403-b13f-97dc63c92490.png",
+    img: "/arward2.png",
     alt: "Futuristic cityscape at night with glowing skyscrapers and neon lights reflecting on water",
-    title: "25 Years of Excellence",
-    desc: "Celebrating over two decades of trusted wealth management and helping thousands achieve their financial goals."
+    title: "Media Coverage",
+    desc: "Making Headlines: Spreading Financial Wisdom Across India!(Featured in Ahmedabad Mirror)."
   },
   {
-    img: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/85eeb024-c674-4b22-ad02-3fd926b8574f.png",
+    img: "/award3.png",
     alt: "Serene mountain lake with crystal clear reflection and a soft sunrise in amber tones",
-    title: "NISM Certification",
-    desc: "NISM-certified Research Analyst with proven expertise in systematic trading strategies and wealth creation."
+    title: "Featured at CNBC Awaaz (1998)",
+    desc: "CNBC Awaaz is one of India's top business channels and a leader in business news and information."
   }
 ];
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const StatItem = ({ number, description }) => {
@@ -27,11 +28,11 @@ const App = (props) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-16">
           {/* Left Section */}
           <div>
-            <h2 className="text-2xl font-light tracking-wider mb-4">
+            <h2 className="text-5xl font-light tracking-wider mb-4">
               NUMBER TELLS
             </h2>
-            <h1 className="text-6xl font-light">
-              OUR <span className="text-blue-400">STORY</span>
+            <h1 className="text-5xl font-light">
+              OUR <span className="text-blue-400 text-8xl">STORY</span>
             </h1>
           </div>
 
@@ -46,6 +47,8 @@ const App = (props) => {
             ))}
           </div>
         </div>
+
+      
 
         {/* Bottom Card */}
         <div className="relative rounded-lg mb-8">
@@ -65,13 +68,15 @@ const App = (props) => {
 
         {/* Get Started Section */}
         <div className="mt-24 mb-16">
-          <div className="mb-12">
-            <h2 className="text-5xl md:text-7xl font-light text-white mb-4">
-              Get Started
-            </h2>
-            <h2 className="text-5xl md:text-7xl font-light text-white">
-              Easily!
-            </h2>
+          <div className="mb-12 flex flex-row justify-between">
+            <div className=" gap-4">
+              <h2 className="text-6xl md:text-8xl font-light text-white mb-4">
+                Get Started
+              </h2>
+              <h2 className="text-6xl md:text-8xl font-light text-white">
+                Easily!
+              </h2>
+            </div>
             <p className="text-gray-400 text-sm md:text-base mt-6 max-w-md">
               Your journey to wealth creation begins with a single conversation. Reach out to our expert team, and let's start building your prosperous future together.
             </p>
@@ -204,8 +209,38 @@ const App = (props) => {
               </svg>
             </a>
           </div>
+
+          
         </div>
-       
+         {/* Our Story Section */}
+        <div className="mt-32 mb-32">
+          <p className="text-[10vw] text-center font-light tracking-wider mb-12">
+            OUR STORY
+          </p>
+          
+          <div className="mb-8">
+            <p className="text-gray-400 text-sm mb-8">• Since 2009</p>
+            
+            <div className="space-y-6 w-full text-gray-300 text-base leading-relaxed max-w-4xl">
+              <p>
+                Northpole Wealth was founded by Kalpesh Patel, a NISM-certified Research Analyst with a vision to make expert financial guidance accessible to all. Built on 25+ years of market experience, our journey began with a simple mission: to empower every Indian to achieve financial independence through disciplined, goal-based investing.
+              </p>
+              
+              <p>
+                Our foundation is rooted in systematic strategies and a commitment to education, embodied by the renowned Bhavthagnyanche rule-based trading system. We believe in replacing emotional decisions with proven, data-driven methods, mentoring hundreds of individuals annually to become confident and successful investors.
+              </p>
+              
+              <p>
+                Today, Northpole Wealth is a trusted partner for over 1,000 clients, recognized with the prestigious Chief Minister's Award for our contributions to financial literacy. We continue to transform financial goals into reality, managing portfolios worth over ₹3500 Cr+ while staying committed to our community through initiatives like the NMC Tree Plantation. Our story is one of growth, trust, and unwavering dedication to our clients' prosperity.
+              </p>
+            </div>
+          </div>
+
+          {/* Brochure Visual */}
+          <div className="mt-16 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-12 md:p-20 flex items-center justify-center">
+            <Image src="/northpole_bookMockup.svg" alt="Brochure" width={500} height={500} className='w-full h-full object-contain' />
+          </div>
+        </div>
       </div>
     </div>
   );

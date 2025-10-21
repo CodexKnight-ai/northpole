@@ -9,30 +9,15 @@ export default function ContactPage() {
             {/* Hero Section with Background Image */}
             <section className="relative w-full h-[60vh] md:h-[70vh]">
                 <Image
-                    src="/sky.jpg"
+                    src="/LetsConnect.png"
                     alt="Contact Hero"
                     fill
                     className="object-cover"
                     priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black" />
                 
-                {/* Hero Content */}
-                <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
-                        Let's Connect
-                    </h1>
-                    <p className="text-2xl md:text-3xl lg:text-4xl font-light text-gray-300">
-                        One step towards <span className="font-bold text-white">GROWTH</span>
-                    </p>
-                    
-                    {/* Arrow Icon */}
-                    <div className="mt-12 w-16 h-16 md:w-20 md:h-20 border border-white/30 flex items-center justify-center">
-                        <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </div>
-                </div>
+                
+               
             </section>
 
             {/* Contact Section */}
@@ -40,7 +25,7 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
                     {/* Left Side - Contact Info */}
                     <div>
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-light mb-12">
+                        <h2 className="text-5xl md:text-7xl lg:text-7xl font-light mb-12">
                             GET IN TOUCH
                         </h2>
                         

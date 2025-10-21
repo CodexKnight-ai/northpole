@@ -63,7 +63,7 @@ const ServicesContent = () => {
           </div>
         </div>
       </div>
-      <div className="border-b-[1px] p-8"></div>
+      <div className="border-b-[1px] border-gray-300 p-8"></div>
        {/* Stats Section */}
       <div className="container mx-auto pt-14 px-6 md:px-12 lg:px-20 flex justify-center items-center">
         <div className="max-w-7xl mx-auto h-full">
@@ -88,7 +88,7 @@ const ServicesContent = () => {
         </div>
       </div>  
       {/* NORTHPOLE Banner */}
-      <Image src="/northpole_banner.png" alt="Northpole Banner  " width={1920} height={1080} className= "w-screen overflow-hidden mb-12" />
+      <Image src="/northpole_banner.svg" alt="Northpole Banner  " width={1920} height={1080} className= "w-screen overflow-hidden mb-12" />
       {/* Main Content */}
       <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16">
         <div className="max-w-7xl mx-auto">

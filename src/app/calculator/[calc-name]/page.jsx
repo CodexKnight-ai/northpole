@@ -385,7 +385,7 @@ const CalculatorPage = () => {
     });
 
     return (
-        <div className="min-h-screen bg-black text-white">
+        <div className="min-h-screen pt-20   bg-black text-white">
             {/* Header Section */}
             <section className="px-6 md:px-12 lg:px-20 pt-24 pb-12 max-w-7xl mx-auto border-b border-gray-800">
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8">

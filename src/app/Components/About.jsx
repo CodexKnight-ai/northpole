@@ -23,7 +23,7 @@ export default function About() {
                             </div>
                             <div className="aspect-[4/3] w-full rounded-xl overflow-hidden bg-gray-100">
                                 <img 
-                                    src="/planet.jpg" 
+                                    src="/kalpesh_bhai.jpg" 
                                     alt="" 
                                     className="w-full h-full object-cover"
                                     onError={(e) => {
@@ -39,7 +39,7 @@ export default function About() {
                     <div className="flex flex-col gap-6 p-6 lg:p-8">
                         <div className="aspect-square w-full max-w-xs mx-auto rounded-2xl overflow-hidden bg-gray-100">
                             <img 
-                                src="/planet.jpg" 
+                                src="/kalpesh_bhai.jpg" 
                                 alt="" 
                                 className="w-full h-full object-cover"
                                 onError={(e) => {

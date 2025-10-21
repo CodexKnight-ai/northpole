@@ -11,8 +11,7 @@ export default function Footer() {
               Contact Us
             </h2>
             <p className="text-gray-400 text-sm sm:text-md md:text-lg leading-relaxed">
-              "Lorem ipsum dolor sit amet consectetur. Vitae eu maecenas
-              volutpat at. Elit sagittis etiam"
+              Northpole Wealth: Charting Your Course to Financial Freedom.
             </p>
           </div>
           <div className="w-full">
@@ -25,8 +24,7 @@ export default function Footer() {
                   href="mailto:northpole@gmail.com"
                   className="text-white text-sm sm:text-md md:text-lg hover:underline break-all"
                 >
-                  northpole@gmail.com
-                </a>
+                    northpole77@gmail.com                </a>
               </address>
               <nav
                 aria-label="Footer navigation"
