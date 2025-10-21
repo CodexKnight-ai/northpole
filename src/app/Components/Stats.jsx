@@ -146,25 +146,19 @@ const Stats = () => {
     },
   };
 
-  // Data for the bar chart (Second Card)
+  // Data for the bar chart (Second Card) - AUM Growth
   const barChartData = {
-    labels: ['Others', 'Titan'],
+    labels: ['2020', '2021', '2022', '2023', '2024'],
     datasets: [
       {
-        label: 'Cost Comparison',
-        data: [200, 100],
-        backgroundColor: [
-          'rgba(153, 153, 153, 0.6)', // Secondary text color for others
-          'rgba(233, 219, 194, 0.9)', // Accent color for Titan
-        ],
-        borderColor: [
-          'rgba(153, 153, 153, 0.8)', // Border for others
-          'rgba(233, 219, 194, 1)',  // Border for Titan
-        ],
+        label: 'AUM Growth',
+        data: [1500, 2000, 2500, 3000, 3500],
+        backgroundColor: 'rgba(233, 219, 194, 0.9)', // Accent color
+        borderColor: 'rgba(233, 219, 194, 1)',
         borderWidth: 1,
-        borderRadius: 2,
-        barPercentage: 0.7, // Increased width of bars
-        categoryPercentage: 0.6, // More space between categories
+        borderRadius: 4,
+        barPercentage: 0.6,
+        categoryPercentage: 0.7,
       },
     ],
   };
@@ -193,10 +187,10 @@ const Stats = () => {
         displayColors: false,
         callbacks: {
           label: (context) => {
-            return `Cost: $${context.raw}`;
+            return `AUM: ₹${context.raw} Cr`;
           },
           title: (items) => {
-            return items[0]?.label || '';
+            return `Year: ${items[0]?.label || ''}`;
           }
         },
         cornerRadius: 4,
@@ -243,7 +237,7 @@ const Stats = () => {
             size: 11
           },
           padding: 8,
-          callback: (value) => `$${value}`,
+          callback: (value) => `₹${value}`,
         },
         beginAtZero: true,
       },
@@ -254,25 +248,29 @@ const Stats = () => {
     },
   };
 
-  // Data for the donut chart (Third Card)
+  // Data for the donut chart (Third Card) - Client Success Stories
   const donutChartData = {
-    labels: ['Time Saved', 'Time Spent'],
+    labels: ['Retirement Planning', "Child's Education", 'Wealth Creation', 'Other Goals'],
     datasets: [
       {
-        data: [100, 0],
+        data: [40, 30, 20, 10],
         backgroundColor: [
-          'rgba(233, 219, 194, 0.9)', // Main accent color
-          'rgba(23, 23, 23, 0.5)',    // Darker background
+          'rgba(233, 219, 194, 0.9)',  // Accent color for Retirement
+          'rgba(233, 219, 194, 0.7)',  // Lighter accent for Education
+          'rgba(233, 219, 194, 0.5)',  // Even lighter for Wealth
+          'rgba(153, 153, 153, 0.5)',  // Gray for Others
         ],
         borderColor: [
-          'rgba(233, 219, 194, 1)',   // Border matches fill
-          'rgba(23, 23, 23, 0.7)',    // Slightly lighter border for contrast
+          'rgba(233, 219, 194, 1)',
+          'rgba(233, 219, 194, 0.9)',
+          'rgba(233, 219, 194, 0.7)',
+          'rgba(153, 153, 153, 0.7)',
         ],
-        borderWidth: 0,
-        cutout: '75%',
-        borderRadius: 2,
-        spacing: 2,
-        hoverOffset: 8,
+        borderWidth: 2,
+        cutout: '65%',
+        borderRadius: 4,
+        spacing: 3,
+        hoverOffset: 10,
       },
     ],
   };
@@ -282,7 +280,39 @@ const Stats = () => {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false,
+        display: true,
+        position: 'bottom',
+        labels: {
+          color: '#FFFFFF',
+          font: {
+            size: 10,
+            family: 'Arial, sans-serif',
+            weight: '400',
+          },
+          padding: 8,
+          boxWidth: 12,
+          boxHeight: 12,
+          usePointStyle: true,
+          pointStyle: 'circle',
+          generateLabels: (chart) => {
+            const data = chart.data;
+            if (data.labels.length && data.datasets.length) {
+              return data.labels.map((label, i) => {
+                const value = data.datasets[0].data[i];
+                return {
+                  text: `${label}: ${value}%`,
+                  fillStyle: data.datasets[0].backgroundColor[i],
+                  strokeStyle: data.datasets[0].borderColor[i],
+                  lineWidth: 1,
+                  hidden: false,
+                  index: i,
+                  fontColor: '#FFFFFF'
+                };
+              });
+            }
+            return [];
+          }
+        }
       },
       tooltip: {
         backgroundColor: 'rgba(6, 6, 6, 0.95)', // Using col1 (#060606)
@@ -361,12 +391,9 @@ const Stats = () => {
                 <span className="text-2xl font-light text-gray-400 ml-1">+</span>
               </div>
             </div>
-            <div className="relative w-full h-48 mb-4">
+            <div className="relative w-full h-48">
               <Line data={lineChartData} options={lineChartOptions} />
             </div>
-            <p className="text-sm leading-relaxed text-gray-400">
-              A line graph can represent steady growth and experience accumulation from Year 1 to Year 25.
-            </p>
           </motion.div>
 
           {/* === Middle Card - Donut Chart === */}
@@ -386,19 +413,8 @@ const Stats = () => {
                 <span className="text-2xl font-light text-gray-400 ml-1">+</span>
               </div>
             </div>
-            <div className="relative w-full h-48 mb-4 flex items-center justify-center">
-              <div className="w-40 h-40 relative">
-                <Doughnut data={donutChartData} options={donutChartOptions} />
-              </div>
-            </div>
-            <div className="text-sm leading-relaxed text-gray-400">
-              <p className="font-medium mb-2">Pie Chart</p>
-              <ul className="space-y-1">
-                <li>• Retirement Planning: 40%</li>
-                <li>• Child's Education: 30%</li>
-                <li>• Wealth Creation: 20%</li>
-                <li>• Other Goals: 10%</li>
-              </ul>
+            <div className="relative w-full h-64 flex items-center justify-center">
+              <Doughnut data={donutChartData} options={donutChartOptions} />
             </div>
           </motion.div>
 
@@ -419,12 +435,9 @@ const Stats = () => {
                 <span className="text-2xl font-light text-gray-400 ml-1">+</span>
               </div>
             </div>
-            <div className="relative w-full h-48 mb-4">
+            <div className="relative w-full h-48">
               <Bar data={barChartData} options={barChartOptions} />
             </div>
-            <p className="text-sm leading-relaxed text-gray-400">
-              A bar chart can show the growth of Assets Under Management (AUM) over recent years (e.g., 2020, 2021, 2022, 2023, 2024).
-            </p>
           </motion.div>
         </div>
       </div>
