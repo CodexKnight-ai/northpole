@@ -21,11 +21,11 @@ export default function About() {
                                 <p className="text-gray-600 mt-2 text-base md:text-lg">
                                     Over 25 years of experience in financial markets                                </p>
                             </div>
-                            <div className="aspect-[4/3] w-full rounded-xl overflow-hidden bg-gray-100">
+                            <div className="w-full rounded-xl overflow-hidden bg-gray-100">
                                 <img 
                                     src="/kalpesh_bhai.jpg" 
                                     alt="" 
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover "
                                     onError={(e) => {
                                         e.target.onerror = null;
                                         e.target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCA4MDAgNDAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjFmMWYxIi8+PHRleHQgeD0iNTAlIiB5PSI1JSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBhbGlnbm1lbnQtYmFzZWxpbmU9Im1pZGRsZSIgZmlsbD0iIzY2NiI+UGxhY2Vob2xkZXIgSW1hZ2U8L3RleHQ+PC9zdmc+'
