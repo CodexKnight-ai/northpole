@@ -387,8 +387,8 @@ const Stats = () => {
               <div className="text-xs text-gray-500 mb-2">1</div>
               <h3 className="text-base sm:text-lg font-light text-gray-300 mb-3 sm:mb-4">Years of Market Experience</h3>
               <div className="flex items-baseline mb-4 sm:mb-6">
-                <span className="text-4xl sm:text-5xl font-light text-white">25</span>
-                <span className="text-xl sm:text-2xl font-light text-gray-400 ml-1">+</span>
+                <span className="text-4xl sm:text-5xl font-light text-[#E9DBC2]">25</span>
+                <span className="text-xl sm:text-2xl font-light text-[#E9DBC2] ml-1">+</span>
               </div>
             </div>
             <div className="relative w-full h-40 sm:h-48">
@@ -409,8 +409,8 @@ const Stats = () => {
               <div className="text-xs text-gray-500 mb-2">2</div>
               <h3 className="text-base sm:text-lg font-light text-gray-300 mb-3 sm:mb-4">Client Success Stories</h3>
               <div className="flex items-baseline mb-4 sm:mb-6">
-                <span className="text-4xl sm:text-5xl font-light text-white">1,000</span>
-                <span className="text-xl sm:text-2xl font-light text-gray-400 ml-1">+</span>
+                <span className="text-4xl sm:text-5xl font-light text-[#E9DBC2]">1,000</span>
+                <span className="text-xl sm:text-2xl font-light text-[#E9DBC2] ml-1">+</span>
               </div>
             </div>
             <div className="relative w-full h-56 sm:h-64 flex items-center justify-center">
@@ -431,8 +431,8 @@ const Stats = () => {
               <div className="text-xs text-gray-500 mb-2">3</div>
               <h3 className="text-base sm:text-lg font-light text-gray-300 mb-3 sm:mb-4">Portfolios Managed</h3>
               <div className="flex items-baseline mb-4 sm:mb-6">
-                <span className="text-3xl sm:text-4xl md:text-5xl font-light text-white">₹3500 Cr</span>
-                <span className="text-xl sm:text-2xl font-light text-gray-400 ml-1">+</span>
+                <span className="text-3xl sm:text-4xl md:text-5xl font-light text-[#E9DBC2]">₹3500 Cr</span>
+                <span className="text-xl sm:text-2xl font-light text-[#E9DBC2] ml-1">+</span>
               </div>
             </div>
             <div className="relative w-full h-40 sm:h-48">
