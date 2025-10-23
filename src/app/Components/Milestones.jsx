@@ -62,7 +62,7 @@ export default function Milestones() {
   };
 
   return (
-    <div className="relative w-full py-16 md:py-24 overflow-hidden">
+    <div className="relative w-full py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden">
       <style jsx>{`
         @keyframes fadeIn {
           from {
@@ -78,10 +78,10 @@ export default function Milestones() {
       <div className="w-full">
         
         {/* Carousel Container */}
-        <div className="relative flex items-center justify-center gap-4 md:gap-6 lg:gap-8 mb-8">
+        <div className="relative flex items-center justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 mb-6 sm:mb-8">
           {/* Previous Slide Preview */}
-          <div className="hidden md:flex flex-col items-center w-48 lg:w-64 flex-shrink-0">
-            <div className="w-full h-64 lg:h-80 rounded-lg overflow-hidden transition-all duration-500 ease-in-out transform hover:scale-105 mb-4">
+          <div className="hidden md:flex flex-col items-center w-40 md:w-48 lg:w-64 flex-shrink-0">
+            <div className="w-full h-48 md:h-64 lg:h-80 rounded-lg overflow-hidden transition-all duration-500 ease-in-out transform hover:scale-105 mb-3 md:mb-4">
               <div className="w-full h-full bg-gray-900 relative">
                 <img
                   src={slides[getPrevIndex()].img}
@@ -91,18 +91,18 @@ export default function Milestones() {
               </div>
             </div>
             <div className="text-center opacity-30 transition-opacity duration-500">
-              <h3 className="text-sm lg:text-base font-light text-white mb-2">
+              <h3 className="text-xs md:text-sm lg:text-base font-light text-white mb-1 md:mb-2">
                 {slides[getPrevIndex()].title}
               </h3>
-              <p className="text-gray-400 text-xs leading-relaxed">
+              <p className="text-gray-400 text-[10px] md:text-xs leading-relaxed">
                 {slides[getPrevIndex()].desc}
               </p>
             </div>
           </div>
           
           {/* Current Slide - Main */}
-          <div className="flex flex-col  items-center w-full md:w-[900px] lg:w-[900px] flex-shrink-0">
-            <div className="relative w-full h-[600px] rounded-lg overflow-hidden shadow-2xl mb-6">
+          <div className="flex flex-col items-center w-full md:w-[600px] lg:w-[900px] flex-shrink-0 px-2 sm:px-0">
+            <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-lg overflow-hidden shadow-2xl mb-4 sm:mb-6">
               <div className="w-full h-full bg-gray-900 relative">
                 <img
                   key={currentSlide}
@@ -118,7 +118,7 @@ export default function Milestones() {
             <div className="text-center opacity-100 transition-opacity duration-500">
               <h3 
                 key={`title-${currentSlide}`}
-                className="text-2xl md:text-3xl lg:text-4xl font-light text-white mb-4 animate-fadeIn"
+                className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-light text-white mb-2 sm:mb-3 md:mb-4 animate-fadeIn"
                 style={{
                   animation: 'fadeIn 0.5s ease-in-out'
                 }}
@@ -127,7 +127,7 @@ export default function Milestones() {
               </h3>
               <p 
                 key={`desc-${currentSlide}`}
-                className="text-gray-400 text-sm md:text-base leading-relaxed animate-fadeIn px-4"
+                className="text-gray-400 text-xs sm:text-sm md:text-base leading-relaxed animate-fadeIn px-4 sm:px-6 md:px-4"
                 style={{
                   animation: 'fadeIn 0.5s ease-in-out 0.1s both'
                 }}
@@ -138,8 +138,8 @@ export default function Milestones() {
           </div>
           
           {/* Next Slide Preview */}
-          <div className="hidden md:flex flex-col items-center w-48 lg:w-64 flex-shrink-0">
-            <div className="w-full h-64 lg:h-80 rounded-lg overflow-hidden transition-all duration-500 ease-in-out transform hover:scale-105 mb-4">
+          <div className="hidden md:flex flex-col items-center w-40 md:w-48 lg:w-64 flex-shrink-0">
+            <div className="w-full h-48 md:h-64 lg:h-80 rounded-lg overflow-hidden transition-all duration-500 ease-in-out transform hover:scale-105 mb-3 md:mb-4">
               <div className="w-full h-full bg-gray-900 relative">
                 <img
                   src={slides[getNextIndex()].img}
@@ -149,10 +149,10 @@ export default function Milestones() {
               </div>
             </div>
             <div className="text-center opacity-30 transition-opacity duration-500">
-              <h3 className="text-sm lg:text-base font-light text-white mb-2">
+              <h3 className="text-xs md:text-sm lg:text-base font-light text-white mb-1 md:mb-2">
                 {slides[getNextIndex()].title}
               </h3>
-              <p className="text-gray-400 text-xs leading-relaxed">
+              <p className="text-gray-400 text-[10px] md:text-xs leading-relaxed">
                 {slides[getNextIndex()].desc}
               </p>
             </div>
@@ -160,14 +160,14 @@ export default function Milestones() {
         </div>
         
         {/* Navigation Arrows */}
-        <div className="flex justify-center items-center gap-4 px-4">
+        <div className="flex justify-center items-center gap-3 sm:gap-4 px-4">
           <button 
             onClick={prevSlide}
             disabled={isAnimating}
-            className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-black hover:bg-gray-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-white text-black hover:bg-gray-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Previous slide"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
@@ -175,10 +175,10 @@ export default function Milestones() {
           <button 
             onClick={nextSlide}
             disabled={isAnimating}
-            className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-black hover:bg-gray-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-white text-black hover:bg-gray-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Next slide"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>

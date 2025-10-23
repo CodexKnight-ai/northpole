@@ -25,36 +25,36 @@ export default function CalculatorsCarousel() {
   };
 
   return (
-    <div className="w-full py-16 md:py-24">
+    <div className="w-full py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-12 flex justify-between items-end">
+        <div className="mb-8 sm:mb-10 md:mb-12 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-0">
           <div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-400 mb-2">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light text-gray-400 mb-1 sm:mb-2">
               Predict Your Portfolio Performance
             </h2>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-400">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light text-gray-400">
               With Our <span className="text-white font-normal">Financial Calculators.</span>
             </h2>
           </div>
           
           {/* Navigation Arrows */}
-          <div className="hidden md:flex gap-3">
+          <div className="hidden sm:flex gap-2 md:gap-3">
             <button
               onClick={prevSlide}
-              className="w-12 h-12 flex items-center justify-center rounded-lg border border-gray-700 hover:bg-gray-800 transition-all duration-300"
+              className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-lg border border-gray-700 hover:bg-gray-800 transition-all duration-300"
               aria-label="Previous"
             >
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
             <button
               onClick={nextSlide}
-              className="w-12 h-12 flex items-center justify-center rounded-lg border border-gray-700 hover:bg-gray-800 transition-all duration-300"
+              className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-lg border border-gray-700 hover:bg-gray-800 transition-all duration-300"
               aria-label="Next"
             >
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
@@ -62,10 +62,10 @@ export default function CalculatorsCarousel() {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {getVisibleCalculators().map((calculator, index) => (
             <Link key={index} href={`/calculator/${calculator.slug}`}>
-              <div className="relative rounded-lg overflow-hidden h-[350px] md:h-[400px] group cursor-pointer">
+              <div className="relative rounded-lg overflow-hidden h-[320px] sm:h-[350px] md:h-[400px] group cursor-pointer">
                 {/* Background Image */}
                 <div className="absolute inset-0">
                   <Image
@@ -79,12 +79,12 @@ export default function CalculatorsCarousel() {
                 </div>
                 
                 {/* Content */}
-                <div className="relative h-full p-6 flex flex-col justify-between z-10">
+                <div className="relative h-full p-5 sm:p-6 flex flex-col justify-between z-10">
                   <div>
-                    <h3 className="text-2xl md:text-3xl font-light text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-light text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">
                       {calculator.name.toUpperCase()}
                     </h3>
-                    <p className="text-gray-300 text-xs md:text-sm leading-relaxed line-clamp-2">
+                    <p className="text-gray-300 text-xs sm:text-xs md:text-sm leading-relaxed line-clamp-2">
                       {calculator.description.substring(0, 100)}...
                     </p>
                   </div>
@@ -95,22 +95,22 @@ export default function CalculatorsCarousel() {
         </div>
 
         {/* Mobile Navigation */}
-        <div className="flex md:hidden justify-center gap-3 mt-8">
+        <div className="flex sm:hidden justify-center gap-3 mt-6 sm:mt-8">
           <button
             onClick={prevSlide}
-            className="w-12 h-12 flex items-center justify-center rounded-lg border border-gray-700 hover:bg-gray-800 transition-all duration-300"
+            className="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-700 hover:bg-gray-800 transition-all duration-300"
             aria-label="Previous"
           >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           <button
             onClick={nextSlide}
-            className="w-12 h-12 flex items-center justify-center rounded-lg border border-gray-700 hover:bg-gray-800 transition-all duration-300"
+            className="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-700 hover:bg-gray-800 transition-all duration-300"
             aria-label="Next"
           >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>

@@ -367,75 +367,75 @@ const Stats = () => {
   };
 
   return (
-    <div className="w-full py-20 md:py-28 lg:py-32">
+    <div className="w-full py-12 sm:py-16 md:py-20 lg:py-28 xl:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-white text-center mb-12 md:mb-16">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-white text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16 px-4">
           "Why work with real advisor?"
         </h2>
         
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {/* === Left Card - Line Chart === */}
           <motion.div 
-            className="relative rounded-lg bg-black p-6 flex flex-col text-white h-full hover:border-gray-700 transition-colors duration-300"
+            className="relative rounded-lg bg-black p-4 sm:p-6 flex flex-col text-white h-full hover:border-gray-700 transition-colors duration-300"
             initial="offscreen"
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.1 }}
             variants={cardVariants}
           >
-            <div className="mb-4">
+            <div className="mb-3 sm:mb-4">
               <div className="text-xs text-gray-500 mb-2">1</div>
-              <h3 className="text-lg font-light text-gray-300 mb-4">Years of Market Experience</h3>
-              <div className="flex items-baseline mb-6">
-                <span className="text-5xl font-light text-white">25</span>
-                <span className="text-2xl font-light text-gray-400 ml-1">+</span>
+              <h3 className="text-base sm:text-lg font-light text-gray-300 mb-3 sm:mb-4">Years of Market Experience</h3>
+              <div className="flex items-baseline mb-4 sm:mb-6">
+                <span className="text-4xl sm:text-5xl font-light text-white">25</span>
+                <span className="text-xl sm:text-2xl font-light text-gray-400 ml-1">+</span>
               </div>
             </div>
-            <div className="relative w-full h-48">
+            <div className="relative w-full h-40 sm:h-48">
               <Line data={lineChartData} options={lineChartOptions} />
             </div>
           </motion.div>
 
           {/* === Middle Card - Donut Chart === */}
           <motion.div 
-            className="relative rounded-lg bg-black p-6 flex flex-col text-white hover:border-gray-700 transition-colors duration-300"
+            className="relative rounded-lg bg-black p-4 sm:p-6 flex flex-col text-white hover:border-gray-700 transition-colors duration-300"
             initial="offscreen"
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.2 }}
             variants={cardVariants}
             transition={{ delay: 0.1 }}
           >
-            <div className="mb-4">
+            <div className="mb-3 sm:mb-4">
               <div className="text-xs text-gray-500 mb-2">2</div>
-              <h3 className="text-lg font-light text-gray-300 mb-4">Client Success Stories</h3>
-              <div className="flex items-baseline mb-6">
-                <span className="text-5xl font-light text-white">1,000</span>
-                <span className="text-2xl font-light text-gray-400 ml-1">+</span>
+              <h3 className="text-base sm:text-lg font-light text-gray-300 mb-3 sm:mb-4">Client Success Stories</h3>
+              <div className="flex items-baseline mb-4 sm:mb-6">
+                <span className="text-4xl sm:text-5xl font-light text-white">1,000</span>
+                <span className="text-xl sm:text-2xl font-light text-gray-400 ml-1">+</span>
               </div>
             </div>
-            <div className="relative w-full h-64 flex items-center justify-center">
+            <div className="relative w-full h-56 sm:h-64 flex items-center justify-center">
               <Doughnut data={donutChartData} options={donutChartOptions} />
             </div>
           </motion.div>
 
           {/* === Right Card - Bar Chart === */}
           <motion.div 
-            className="relative rounded-lg bg-black p-6 flex flex-col text-white hover:border-gray-700 transition-colors duration-300"
+            className="relative rounded-lg bg-black p-4 sm:p-6 flex flex-col text-white hover:border-gray-700 transition-colors duration-300"
             initial="offscreen"
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.2 }}
             variants={cardVariants}
             transition={{ delay: 0.2 }}
           >
-            <div className="mb-4">
+            <div className="mb-3 sm:mb-4">
               <div className="text-xs text-gray-500 mb-2">3</div>
-              <h3 className="text-lg font-light text-gray-300 mb-4">Portfolios Managed</h3>
-              <div className="flex items-baseline mb-6">
-                <span className="text-5xl font-light text-white">₹3500 Cr</span>
-                <span className="text-2xl font-light text-gray-400 ml-1">+</span>
+              <h3 className="text-base sm:text-lg font-light text-gray-300 mb-3 sm:mb-4">Portfolios Managed</h3>
+              <div className="flex items-baseline mb-4 sm:mb-6">
+                <span className="text-3xl sm:text-4xl md:text-5xl font-light text-white">₹3500 Cr</span>
+                <span className="text-xl sm:text-2xl font-light text-gray-400 ml-1">+</span>
               </div>
             </div>
-            <div className="relative w-full h-48">
+            <div className="relative w-full h-40 sm:h-48">
               <Bar data={barChartData} options={barChartOptions} />
             </div>
           </motion.div>

@@ -1,7 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useRef } from 'react';
 import { useParams } from 'next/navigation';
+import { motion, useInView } from 'framer-motion';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -384,32 +385,59 @@ const CalculatorPage = () => {
         return !!form[p.name];
     });
 
+    const headerRef = useRef(null);
+    const formRef = useRef(null);
+    const aboutRef = useRef(null);
+    const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
+    const formInView = useInView(formRef, { once: true, margin: "-100px" });
+    const aboutInView = useInView(aboutRef, { once: true, margin: "-100px" });
+    
     return (
         <div className="min-h-screen pt-20   bg-black text-white">
             {/* Header Section */}
-            <section className="px-6 md:px-12 lg:px-20 pt-24 pb-12 max-w-7xl mx-auto border-b border-gray-800">
+            <section ref={headerRef} className="px-6 md:px-12 lg:px-20 pt-24 pb-12 max-w-7xl mx-auto border-b border-gray-800">
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8">
-                    <div className="lg:max-w-md">
+                    <motion.div 
+                        className="lg:max-w-md"
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={headerInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                    >
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light leading-tight tracking-wide uppercase">
                             {calculator.name}<br/>CALC
                         </h1>
-                    </div>
-                    <div className="lg:max-w-lg">
+                    </motion.div>
+                    <motion.div 
+                        className="lg:max-w-lg"
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={headerInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                    >
                         <p className="text-gray-400 text-sm md:text-base leading-relaxed">
                             {calculator.description}
                         </p>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
 
             {/* Calculator Section */}
-            <main className="px-6 md:px-12 lg:px-20 py-12 max-w-7xl mx-auto">
+            <main ref={formRef} className="px-6 md:px-12 lg:px-20 py-12 max-w-7xl mx-auto">
                 <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-10 w-full">
                     {/* Inputs */}
-                    <section className="w-full md:w-1/2 flex flex-col justify-between px-3 flex-1 min-h-[500px]">
+                    <motion.section 
+                        className="w-full md:w-1/2 flex flex-col justify-between px-3 flex-1 min-h-[500px]"
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={formInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                    >
                         <div className="flex flex-col gap-12">
-                            {calculator.params.map(param => (
-                                <div key={param.name}>
+                            {calculator.params.map((param, index) => (
+                                <motion.div 
+                                    key={param.name}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={formInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                    transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+                                >
                                     <label
                                         htmlFor={param.name}
                                         className="block text-xs uppercase tracking-wider mb-3 text-gray-400"
@@ -442,33 +470,48 @@ const CalculatorPage = () => {
                                             className="w-full p-4 bg-transparent border border-gray-700 rounded-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-500 transition-colors"
                                         />
                                     )}
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
 
                         {/* Buttons */}
-                        <div className="flex flex-col gap-4 mt-8">
-                            <button
+                        <motion.div 
+                            className="flex flex-col gap-4 mt-8"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={formInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                            transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+                        >
+                            <motion.button
                                 type="submit"
                                 className="w-full p-4 bg-white text-black font-medium rounded-sm hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed uppercase text-sm tracking-wide"
                                 disabled={!isValid}
                             >
                                 Plan My Future Value
-                            </button>
-                            <button
+                            </motion.button>
+                            <motion.button
                                 type="button"
                                 onClick={handleReset}
                                 className="w-full p-4 border border-gray-700 text-white rounded-sm hover:bg-gray-900 transition-colors uppercase text-sm tracking-wide"
                             >
                                 Reset
-                            </button>
-                        </div>
-                    </section>
+                            </motion.button>
+                        </motion.div>
+                    </motion.section>
 
                     {/* Output and Chart */}
-                    <section className="w-full md:w-1/2 flex flex-col gap-6 flex-1">
+                    <motion.section 
+                        className="w-full md:w-1/2 flex flex-col gap-6 flex-1"
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={formInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                    >
                         {/* Chart */}
-                        <div className={`flex-1 min-h-[350px] bg-[#1a1a1a] border border-gray-700 rounded-lg ${!isSubmitted ? 'opacity-50' : ''}`}>
+                        <motion.div 
+                            className={`flex-1 min-h-[350px] bg-[#1a1a1a] border border-gray-700 rounded-lg ${!isSubmitted ? 'opacity-50' : ''}`}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={formInView ? { opacity: isSubmitted ? 1 : 0.5, scale: 1 } : { opacity: 0, scale: 0.95 }}
+                            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+                        >
                             {isSubmitted && chartData.labels.length > 0 ? (
                                 <div className="h-full w-full p-4">
                                     <Line data={chartData} options={chartOptions} />
@@ -478,10 +521,15 @@ const CalculatorPage = () => {
                                     <p className="text-gray-500">Enter your details and click "CALCULATE" to see results</p>
                                 </div>
                             )}
-                        </div>
+                        </motion.div>
 
                         {/* Summary Box */}
-                        <div className={`bg-[#1a1a1a] border border-gray-700 rounded-sm p-6 transition-opacity relative ${!isSubmitted ? 'opacity-50' : ''}`}>
+                        <motion.div 
+                            className={`bg-[#1a1a1a] border border-gray-700 rounded-sm p-6 transition-opacity relative ${!isSubmitted ? 'opacity-50' : ''}`}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={formInView ? { opacity: isSubmitted ? 1 : 0.5, y: 0 } : { opacity: 0, y: 20 }}
+                            transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+                        >
                             {!isSubmitted ? (
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     <p className="text-gray-500 text-sm">Results will appear here</p>
@@ -536,18 +584,27 @@ const CalculatorPage = () => {
                                     )}
                                 </div>
                             )}
-                        </div>
-                    </section>
+                        </motion.div>
+                    </motion.section>
                 </form>
             </main>
 
             {/* About Section */}
-            <section className="px-6 md:px-12 lg:px-20 py-16 max-w-7xl mx-auto border-t border-gray-800">
-                <h2 className="text-3xl md:text-4xl font-light mb-12 text-center uppercase tracking-wide">
+            <section ref={aboutRef} className="px-6 md:px-12 lg:px-20 py-16 max-w-7xl mx-auto border-t border-gray-800">
+                <motion.h2 
+                    className="text-3xl md:text-4xl font-light mb-12 text-center uppercase tracking-wide"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={aboutInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                >
                     About {calculator.name} Calc
-                </h2>
+                </motion.h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                    <div>
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={aboutInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                    >
                         <h3 className="text-lg font-semibold mb-4">What is a {calculator.name} Investment?</h3>
                         <p className="text-gray-400 text-sm leading-relaxed mb-6">
                             {calculator.description}
@@ -556,8 +613,12 @@ const CalculatorPage = () => {
                         <p className="text-gray-400 text-sm leading-relaxed">
                             Our {calculator.name.toLowerCase()} calculator is so convenient to use that even a layman can use it. All you need to do is enter the required inputs such as {calculator.params.slice(0, 2).map(p => p.name.replace(/_/g, ' ')).join(', ')}, and the expected rate of return you are willing to stay invested and, the expected rate of return that you think the investment will generate. After entering the required values, the calculator will give you the future value of your investments.
                         </p>
-                    </div>
-                    <div>
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={aboutInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+                        transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+                    >
                         <h3 className="text-lg font-semibold mb-4">What is {calculator.name} Calculator?</h3>
                         <p className="text-gray-400 text-sm leading-relaxed mb-6">
                             With {calculator.name} Calculator, you can calculate the maturity value of your investment made today at a certain rate of interest. For example, if you invest ₹1,00,000 today for 10 years at 12% rate of interest, the {calculator.name.toLowerCase()} calculator tells you the future value of your investment made today will be ₹3,10,584.82 after 10 years.
@@ -566,7 +627,7 @@ const CalculatorPage = () => {
                         <p className="text-gray-400 text-sm leading-relaxed">
                             Ideally any investment (whether lumpsum or SIP) should be done keeping in mind your financial goals, time horizon, and risk appetite. {calculator.name} investment is preferred when one has large amount of surplus funds and more importantly if he/she is willing to stay invested for a longer period. Therefore, the return on {calculator.name.toLowerCase()} investment done over a longer period helps generate compounding rate of returns.
                         </p>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
         </div>

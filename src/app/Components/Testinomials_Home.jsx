@@ -95,15 +95,15 @@ const Testimonials_Home = () => {
   }, []);
 
   return (
-    <div className="w-full text-white py-20 md:py-28 lg:py-32">
+    <div className="w-full text-white py-12 sm:py-16 md:py-20 lg:py-28 xl:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex justify-between items-start border-b border-gray-800 pb-8 mb-16">
-          <h2 className="max-w-2xl text-4xl md:text-5xl lg:text-6xl leading-tight font-light text-gray-400">
+        <div className="flex flex-col sm:flex-row justify-between items-start border-b border-gray-800 pb-6 sm:pb-8 mb-10 sm:mb-12 md:mb-16 gap-4 sm:gap-0">
+          <h2 className="max-w-2xl text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight font-light text-gray-400">
             What our connection feels{" "}
             <span className="text-white font-normal">about us</span>
           </h2>
-          <span className="text-xs font-normal tracking-widest text-white self-start mt-2">
+          <span className="text-[10px] sm:text-xs font-normal tracking-widest text-white self-start sm:mt-2">
             TESTIMONIALS
           </span>
         </div>
@@ -114,24 +114,24 @@ const Testimonials_Home = () => {
             <div className="embla__container gap-6">
               {testimonials.map((item, index) => (
                 <div key={index} className="embla__slide">
-                  <article className="bg-white rounded-lg p-8 h-full flex flex-col justify-between min-h-[450px] hover:shadow-xl transition-shadow duration-300">
+                  <article className="bg-white rounded-lg p-6 sm:p-8 h-full flex flex-col justify-between min-h-[380px] sm:min-h-[420px] md:min-h-[450px] hover:shadow-xl transition-shadow duration-300">
                     <div>
                       <img
                         alt={item.name}
-                        className="w-12 h-12 rounded-full mb-6 object-cover"
+                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mb-4 sm:mb-6 object-cover"
                         src={item.img}
                         width="48"
                         height="48"
                       />
-                      <p className="mb-8 text-sm md:text-base leading-relaxed text-gray-600">
+                      <p className="mb-6 sm:mb-8 text-xs sm:text-sm md:text-base leading-relaxed text-gray-600">
                         {item.text}
                       </p>
                     </div>
                     <footer className="mt-auto">
-                      <p className="text-2xl md:text-3xl text-black mb-1 font-serif italic">
+                      <p className="text-xl sm:text-2xl md:text-3xl text-black mb-1 font-serif italic">
                         {item.name}
                       </p>
-                      <p className="text-xs uppercase text-gray-500 tracking-wide">
+                      <p className="text-[10px] sm:text-xs uppercase text-gray-500 tracking-wide">
                         {item.role}
                       </p>
                     </footer>
